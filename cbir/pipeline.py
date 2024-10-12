@@ -8,7 +8,7 @@ import cv2
 import numpy as np
 from tqdm import tqdm
 
-from cbir import FeatureExtractor, FeatureStore
+from cbir import FeatureExtractor, FeatureStore, SingleFeatureExtractor, BatchFeatureExtractor
 from cbir.entities.search_objects import ImageSearchObject
 
 
@@ -33,11 +33,15 @@ class CBIR():
                 images = [cv2.imread(image) for image in images]
         
         features = []
-        for image in tqdm(images, desc="Extracting Features"):
-            features.append(self.feature_extractor(image))
+        if isinstance(self.feature_extractor, SingleFeatureExtractor):
+            # for image in tqdm(images, desc="Extracting Features"):
+            for image in images:
+                features.append(self.feature_extractor(image))
+        elif isinstance(self.feature_extractor, BatchFeatureExtractor):
+            features = self.feature_extractor(images).tolist()
             
         self.feature_store.add_index(images, features)
-        print(f"Index Completed! {len(images)} images indexed.")
+        # print(f"Index Completed! {len(images)} images indexed.")
     
     @abstractmethod
     def retrieve(self, image: np.ndarray | os.PathLike, k=5) -> list[ImageSearchObject]:
@@ -45,4 +49,7 @@ class CBIR():
             image = cv2.imread(image)
             
         feature = self.feature_extractor(image)
+        if len(feature.shape) == 2:
+            feature = feature[0]
+            
         return self.feature_store.retrieve(feature, k=k)

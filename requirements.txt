@@ -3,3 +3,7 @@ matplotlib
 pandas
 opencv-contrib-python
 scikit-image
+scikit-learn
+torch
+torchvision
+tqdm
