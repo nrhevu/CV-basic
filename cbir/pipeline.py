@@ -6,6 +6,7 @@ from typing import List
 
 import cv2
 import numpy as np
+from tqdm import tqdm
 
 from cbir import FeatureExtractor, FeatureStore
 from cbir.entities.search_objects import ImageSearchObject
@@ -32,7 +33,7 @@ class CBIR():
                 images = [cv2.imread(image) for image in images]
         
         features = []
-        for image in images:
+        for image in tqdm(images, desc="Extracting Features"):
             features.append(self.feature_extractor(image))
             
         self.feature_store.add_index(images, features)
