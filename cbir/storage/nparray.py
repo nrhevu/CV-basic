@@ -1,12 +1,14 @@
+from __future__ import annotations
+
 from typing import Literal
 
 import numpy as np
-from sklearn.neighbors import KNeighborsClassifier
 
-from cbir import FeatureStore, ImageSearchObject, Retrieve
+from cbir import FeatureStore, Retrieve
+from cbir.entities.search_objects import ImageSearchObject
 
 
-class NPArray(FeatureStore):
+class NPArrayStore(FeatureStore):
     def __init__(
         self, retrieve : Retrieve
     ) -> None:
@@ -38,13 +40,12 @@ class NPArray(FeatureStore):
             self.y.append(len(self.y))
 
         self.retrieval.fit(self.X, self.y)
-        print(f"Index Completed! {len(self.images)} images indexed.")
 
     def retrieve(self, feature: np.ndarray, k=5) -> list[ImageSearchObject]:
         distances, indices = self.retrieval.predict(feature, k=k)
         
         result = []
-        images = np.take(self.images, indices, axis=0)
+        images = [self.images[i] for i in indices]
         for image, distance in zip(images, distances):
             result.append(ImageSearchObject(image, 1/distance))
             

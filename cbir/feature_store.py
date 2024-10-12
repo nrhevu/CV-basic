@@ -1,9 +1,11 @@
+from __future__ import annotations
+
 import os
 from abc import ABC, abstractmethod
 
 import numpy as np
 
-from cbir import ImageSearchObject
+from cbir.entities.search_objects import ImageSearchObject
 
 
 class FeatureStore(ABC):

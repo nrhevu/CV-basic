@@ -1,0 +1,1 @@
+from cbir.featuring.rgbhistogram import RGBHistogram

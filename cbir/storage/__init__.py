@@ -1,0 +1,1 @@
+from cbir.storage.nparray import NPArrayStore

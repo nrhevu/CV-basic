@@ -1,6 +1,9 @@
-from abc import ABC, abstractmethod
-import numpy as np
+from __future__ import annotations
+
 import os
+from abc import ABC, abstractmethod
+
+import numpy as np
 
 
 class Retrieve(ABC):
