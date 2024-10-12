@@ -17,7 +17,7 @@ class CBIR():
         self.feature_store = feature_store
     @abstractmethod
     def indexing(self, images: List[np.ndarray | os.PathLike] | np.ndarray | os.PathLike) -> None:
-        if isinstance(images, np.ndarray):
+        if isinstance(images, np.ndarray) and len(images.shape) == 3:
             images = [images]
         elif isinstance(images, (str, os.PathLike)):
             if not os.path.exists(images):

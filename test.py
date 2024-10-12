@@ -6,15 +6,22 @@ array_store = NPArrayStore(retrieve=KNNRetrieval(metric="cosine"))
 
 cbir = CBIR(rgb_histogram, array_store)
 
-import cv2
+import torch
+import torchvision
+import torchvision.transforms as transforms
 
-n1 = cv2.imread("/home/rhev/Works/Code/CV-basic/data/prj1-4/009_0.png")
-n2 = cv2.imread(
-    "/home/rhev/Works/Code/CV-basic/data/prj1-2/1_wIXlvBeAFtNVgJd49VObgQ.png"
+trainset = torchvision.datasets.CIFAR100(
+    root="./data", train=True, download=False, transform=transforms.ToTensor()
 )
-n3 = cv2.imread("/home/rhev/Works/Code/CV-basic/data/prj1-4/001_0.png")
-n4 = cv2.imread("/home/rhev/Works/Code/CV-basic/data/prj1-4/001_0.png")
+# testset = torchvision.datasets.CIFAR100(
+#     root="./data", train=False, download=False, transform=transforms.ToTensor()
+# )
 
-cbir.indexing([n1, n2, n3])
+# trainloader = torch.utils.data.DataLoader(
+#     trainset, batch_size=4, shuffle=True, num_workers=2
+# )
+# testloader = torch.utils.data.DataLoader(
+#     testset, batch_size=4, shuffle=False, num_workers=2
+# )
 
-cbir.retrieve(n4, k=1)
+cbir.indexing(trainset.data)
