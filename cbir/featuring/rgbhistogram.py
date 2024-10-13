@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import itertools
 import os
+from typing import Literal
 
 import cv2
 import numpy as np
@@ -15,7 +16,7 @@ class RGBHistogram(SingleFeatureExtractor):
         self,
         n_bin=12,  # histogram bins
         n_slice=3,  # slice image
-        h_type="region",  # global or region) -> None
+        h_type : Literal["global", "region"] ="region",  # global or region) -> None
         normalize=True,
     ) -> None:
         self.n_bin = n_bin
