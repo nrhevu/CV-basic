@@ -10,24 +10,25 @@ from torchvision import models
 
 from cbir.feature_extractor import BatchFeatureExtractor
 
+
 class ResidualNet(nn.Module):
     def __init__(self, model="resnet152", pretrained=True):
         super(ResidualNet, self).__init__()
         if model == "resnet18":
             if pretrained:
-                self.model = models.resnet18(pretrained=True)
+                self.model = models.resnet18(weights=models.ResNet18_Weights.IMAGENET1K_V1)
         elif model == "resnet34":
             if pretrained:
-                self.model = models.resnet34(pretrained=True)
+                self.model = models.resnet34(weights=models.ResNet34_Weights.IMAGENET1K_V1)
         elif model == "resnet50":
             if pretrained:
-                self.model = models.resnet50(pretrained=True)
+                self.model = models.resnet50(weights=models.ResNet50_Weights.IMAGENET1K_V1)
         elif model == "resnet101":
             if pretrained:
-                self.model = models.resnet101(pretrained=True)
+                self.model = models.resnet101(weights=models.ResNet101_Weights.IMAGENET1K_V1)
         elif model == "resnet152":
             if pretrained:
-                self.model = models.resnet152(pretrained=True)
+                self.model = models.resnet152(weights=models.ResNet152_Weights.IMAGENET1K_V1)
     
     def forward(self, x):
         x = self.model.conv1(x)
@@ -38,25 +39,14 @@ class ResidualNet(nn.Module):
         x = self.model.layer2(x)
         x = self.model.layer3(x)
         x = self.model.layer4(x)  # x after layer4, shape = N * 512 * H/32 * W/32
-        max_pool = torch.nn.MaxPool2d((x.size(-2),x.size(-1)), stride=(x.size(-2),x.size(-1)), padding=0, ceil_mode=False)
-        Max = max_pool(x)  # avg.size = N * 512 * 1 * 1
-        Max = Max.view(Max.size(0), -1)  # avg.size = N * 512
-        avg_pool = torch.nn.AvgPool2d((x.size(-2),x.size(-1)), stride=(x.size(-2),x.size(-1)), padding=0, ceil_mode=False, count_include_pad=True)
-        avg = avg_pool(x)  # avg.size = N * 512 * 1 * 1
-        avg = avg.view(avg.size(0), -1)  # avg.size = N * 512
-        fc = self.model.fc(avg)  # fc.size = N * 1000
-        output = {
-            'max': Max,
-            'avg': avg,
-            'fc' : fc
-        }
-        return output
+        avg = self.model.avgpool(x)
+        avg = avg.view(avg.size(0), -1)
+        return avg
 
     
 class ResNetExtractor(BatchFeatureExtractor):
-    def __init__(self, model: str, pick_layer : Literal["max", "avg", "fc"], device: str = "cpu") -> None:
+    def __init__(self, model: str, device: str = "cpu") -> None:
         self.model = ResidualNet(model, pretrained=True)
-        self.pick_layer = pick_layer
         self.device = device
         self.model.model.to(device)
         self.model.model.eval()
@@ -67,7 +57,9 @@ class ResNetExtractor(BatchFeatureExtractor):
         with torch.no_grad():
             imgs = Variable(torch.from_numpy(imgs).float()).to(self.device)
             output = self.model(imgs)
-        return output[self.pick_layer].cpu().numpy()
+        out = output.cpu().numpy()
+        # out /= out.sum(axis=1, keepdims=True)
+        return out
         
         
         

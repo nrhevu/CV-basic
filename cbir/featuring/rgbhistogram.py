@@ -6,7 +6,8 @@ import os
 import cv2
 import numpy as np
 
-from cbir.feature_extractor import FeatureExtractor, SingleFeatureExtractor, BatchFeatureExtractor
+from cbir.feature_extractor import (BatchFeatureExtractor, FeatureExtractor,
+                                    SingleFeatureExtractor)
 
 
 class RGBHistogram(SingleFeatureExtractor):

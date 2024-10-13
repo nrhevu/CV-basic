@@ -8,7 +8,8 @@ import cv2
 import numpy as np
 from tqdm import tqdm
 
-from cbir import FeatureExtractor, FeatureStore, SingleFeatureExtractor, BatchFeatureExtractor
+from cbir import (BatchFeatureExtractor, FeatureExtractor, FeatureStore,
+                  SingleFeatureExtractor)
 from cbir.entities.search_objects import ImageSearchObject
 
 
