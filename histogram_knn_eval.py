@@ -73,7 +73,7 @@ eval = pd.DataFrame(
     ]
 )
 
-n_bins = [2, 4, 8, 16, 32, 64, 128, 256]
+n_bins = [2, 4, 8, 12]
 h_types = ["region", "global"]
 knn_metrics = ["euclidean", "cosine"]
 for bins, h_type, metric in grid(n_bins, h_types, knn_metrics):
