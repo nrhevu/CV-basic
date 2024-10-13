@@ -1,0 +1,3 @@
+[submodule "CBIR_System_using_SIFT"]
+	path = CBIR_System_using_SIFT
+	url = https://github.com/xKHUNx/CBIR_System_using_SIFT.git
