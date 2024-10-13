@@ -7,3 +7,4 @@ from cbir.retrieve import Retrieve
 from cbir.storage import *
 from cbir.featuring import *
 from cbir.retrieval import *
+from cbir.metrics import *

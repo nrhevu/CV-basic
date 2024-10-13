@@ -45,12 +45,18 @@ class CBIR():
         # print(f"Index Completed! {len(images)} images indexed.")
     
     @abstractmethod
-    def retrieve(self, image: np.ndarray | os.PathLike, k=5) -> list[ImageSearchObject]:
-        if isinstance(image, os.PathLike):
-            image = cv2.imread(image)
-            
-        feature = self.feature_extractor(image)
-        if len(feature.shape) == 2:
-            feature = feature[0]
-            
-        return self.feature_store.retrieve(feature, k=k)
+    def retrieve(self, images: np.ndarray | os.PathLike, k=5) -> list[ImageSearchObject]:
+        if isinstance(images, os.PathLike):
+            images = cv2.imread(images)
+        
+        if isinstance(self.feature_extractor, SingleFeatureExtractor):
+            feature = self.feature_extractor(images)            
+            return self.feature_store.retrieve(feature, k=k)
+        
+        elif isinstance(self.feature_extractor, BatchFeatureExtractor):
+            features = self.feature_extractor(images)
+            result = []
+            for feature in features:
+                result.append(self.feature_store.retrieve(feature, k=k))
+                
+            return result
