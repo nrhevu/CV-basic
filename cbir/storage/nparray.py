@@ -41,13 +41,15 @@ class NPArrayStore(FeatureStore):
 
         self.retrieval.fit(self.X, self.y)
 
-    def retrieve(self, feature: np.ndarray, k=5) -> list[ImageSearchObject]:
+    def retrieve(self, feature: np.ndarray, k=5, return_image=False) -> list[ImageSearchObject]:
         distances, indices = self.retrieval.predict(feature, k=k)
         
         result = []
-        images = [self.images[i] for i in indices]
-        for image, distance in zip(images, distances):
-            result.append(ImageSearchObject(image, 1/distance))
+        for index, distance in zip(indices, distances):
+            image = None
+            if return_image:
+                image = self.image[index]
+            result.append(ImageSearchObject(index, 1/distance, image))
             
         return result
         
