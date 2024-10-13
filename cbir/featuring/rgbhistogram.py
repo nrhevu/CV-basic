@@ -6,10 +6,11 @@ import os
 import cv2
 import numpy as np
 
-from cbir.feature_extractor import FeatureExtractor
+from cbir.feature_extractor import (BatchFeatureExtractor, FeatureExtractor,
+                                    SingleFeatureExtractor)
 
 
-class RGBHistogram(FeatureExtractor):
+class RGBHistogram(SingleFeatureExtractor):
     def __init__(
         self,
         n_bin=12,  # histogram bins
