@@ -11,6 +11,7 @@ from PIL import Image
 
 from cbir import *
 from cbir.pipeline import *
+from cbir.utils.grid import grid
 
 # Ignore all warnings
 warnings.filterwarnings("ignore")
@@ -54,23 +55,35 @@ testloader = torch.utils.data.DataLoader(
     testset, batch_size=128, shuffle=False, num_workers=2
 )
 
+# BEGIN EVALUATION
 eval = pd.DataFrame(
-    columns=["options", "map", "hit_rate", "avg_indexing_time", "avg_retrieval_time"]
+    columns=[
+        "model",
+        "metric",
+        "map@1",
+        "map@5",
+        "map@10",
+        "hit_rate@1",
+        "hit_rate@5",
+        "hit_rate@10",
+        "avg_indexing_time",
+        "avg_retrieval_time",
+    ]
 )
 
-# BEGIN EVALUATION
-for options in ["resnet18", "resnet34", "resnet50", "resnet101", "resnet152"]:
-    print("Evaluate for model: ", options)
+models = ["resnet18", "resnet34", "resnet50", "resnet101", "resnet152"]
+knn_metrics = ["euclidean", "cosine"]
+for model, metric in grid(models, knn_metrics):
+    print("Evaluate for model: ", model, " with knn metric: ", metric)
 
     # Initialization
-    resnet = ResNetExtractor(model=options, device="cuda")
-    array_store = NPArrayStore(retrieve=KNNRetrieval(metric="cosine"))
+    resnet = ResNetExtractor(model=model, device="cuda")
+    array_store = NPArrayStore(retrieve=KNNRetrieval(metric=metric))
     cbir = CBIR(resnet, array_store)
 
     # Indexing
     start = time()
     for images, labels in tqdm(dataloader, desc="Indexing"):
-        # images = (images.numpy().transpose(0,2,3,1) * 255).astype(np.uint8)
         images = images.numpy()
         cbir.indexing(images)
     avg_indexing_time = round((time() - start) / len(dataset), 6)
@@ -80,40 +93,60 @@ for options in ["resnet18", "resnet34", "resnet50", "resnet101", "resnet152"]:
     rs = []
     ground_truth = []
     for images, labels in tqdm(testloader, desc="Retrieval"):
-        # images = (images.numpy().transpose(0,2,3,1) * 255).astype(np.uint8)
         images = images.numpy()
         rs.extend(cbir.retrieve(images, k=10))
         ground_truth.extend(labels)
     avg_retrieval_time = round((time() - start) / len(dataset), 6)
 
     # Evaluation
-    ap = []
-    hit = []
+    ap1 = []
+    hit1 = []
+    ap5 = []
+    hit5 = []
+    ap10 = []
+    hit10 = []
     for r, g in zip(rs, ground_truth):
         predicted = []
         for i in r:
             predicted.append(i.index)
         class_preds = np.take(dataset.targets, predicted, axis=0)
-        ap.append(average_precision(class_preds.tolist(), [g.tolist()], 10))
-        hit.append(hit_rate(class_preds.tolist(), [g.tolist()], 10))
+        ap1.append(average_precision(class_preds.tolist(), [g.tolist()], 1))
+        hit1.append(hit_rate(class_preds.tolist(), [g.tolist()], 1))
+        ap5.append(average_precision(class_preds.tolist(), [g.tolist()], 5))
+        hit5.append(hit_rate(class_preds.tolist(), [g.tolist()], 5))
+        ap10.append(average_precision(class_preds.tolist(), [g.tolist()], 10))
+        hit10.append(hit_rate(class_preds.tolist(), [g.tolist()], 10))
 
-    map = round(np.mean(ap), 6)
-    avg_hit = round(np.mean(hit), 6)
-    
+    map1 = round(np.mean(ap1), 6)
+    avg_hit1 = round(np.mean(hit1), 6)
+    map5 = round(np.mean(ap5), 6)
+    avg_hit5 = round(np.mean(hit5), 6)
+    map10 = round(np.mean(ap10), 6)
+    avg_hit10 = round(np.mean(hit10), 6)
+
     new_row = pd.DataFrame(
         {
-            "options": [options],
-            "map": [map],
-            "hit_rate": [avg_hit],
+            "model": [model],
+            "metric": [metric],
+            "map@1": [map1],
+            "map@5": [map5],
+            "map@10": [map10],
+            "hit_rate@1": [avg_hit1],
+            "hit_rate@5": [avg_hit5],
+            "hit_rate@10": [avg_hit10],
             "avg_indexing_time": [avg_indexing_time],
             "avg_retrieval_time": [avg_retrieval_time],
         }
     )
     eval = pd.concat([eval, new_row], ignore_index=True)
     print(
-        "map: ", map,
-        "hit_rate: ", avg_hit,
+        "map@1: ", map1,
+        "map@5: ", map5,
+        "map@10: ", map10,
+        "hit_rate@1: ", avg_hit1,
+        "hit_rate@5: ", avg_hit5,
+        "hit_rate@10: ", avg_hit10,
         "avg_indexing_time: ", avg_indexing_time,
         "avg_retrieval_time: ", avg_retrieval_time,
     )
-eval.to_csv("out/resnet_eval.csv")
+eval.to_csv("out/resnet_knn_gpu_eval.csv", index=False)
