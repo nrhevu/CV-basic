@@ -1,3 +1,4 @@
+import gc
 import warnings
 from time import time
 
@@ -72,7 +73,7 @@ eval = pd.DataFrame(
     ]
 )
 
-n_bins = [2, 4, 8, 16, 32, 64, 128, 256]
+n_bins = [2, 4, 8, 12]
 h_types = ["region", "global"]
 knn_metrics = ["euclidean", "cosine"]
 for bins, h_type, metric in grid(n_bins, h_types, knn_metrics):
@@ -153,4 +154,9 @@ for bins, h_type, metric in grid(n_bins, h_types, knn_metrics):
         "avg_indexing_time: ", avg_indexing_time,
         "avg_retrieval_time: ", avg_retrieval_time,
     )
+    
+    # Cleanup
+    del cbir
+    del array_store
+    gc.collect()
 eval.to_csv("out/histogram_knn_eval.csv", index=False)

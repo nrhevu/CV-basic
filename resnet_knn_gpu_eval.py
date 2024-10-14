@@ -1,3 +1,4 @@
+import gc
 import warnings
 from time import time
 
@@ -149,4 +150,9 @@ for model, metric in grid(models, knn_metrics):
         "avg_indexing_time: ", avg_indexing_time,
         "avg_retrieval_time: ", avg_retrieval_time,
     )
+    
+    # Cleanup
+    del cbir
+    del array_store
+    gc.collect()
 eval.to_csv("out/resnet_knn_gpu_eval.csv", index=False)

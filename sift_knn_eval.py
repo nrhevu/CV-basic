@@ -1,3 +1,4 @@
+import gc
 import warnings
 from time import time
 
@@ -148,6 +149,7 @@ for k in [32, 64, 96, 128, 256]:
             {
                 "k": [k],
                 "type": [vector_type],
+                "metric" : [metric],
                 "map@1": [map1],
                 "map@5": [map5],
                 "map@10": [map10],
@@ -171,4 +173,9 @@ for k in [32, 64, 96, 128, 256]:
             "avg_retrieval_time: ", avg_retrieval_time,
             "fitting_time: ", fitting_time
         )
-eval.to_csv("out/sift_eval.csv")
+        
+        # Cleanup
+        del cbir
+        del array_store
+        gc.collect()
+eval.to_csv("out/sift_knn_eval.csv", index=False)
