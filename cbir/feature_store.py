@@ -6,6 +6,7 @@ from abc import ABC, abstractmethod
 import numpy as np
 
 from cbir.entities.search_objects import ImageSearchObject
+from cbir.utils.distance import d2s_typing
 
 
 class FeatureStore(ABC):
@@ -47,5 +48,5 @@ class FeatureStore(ABC):
         pass
     
     @abstractmethod
-    def retrieve(self, feature: np.ndarray, k=5) -> list[ImageSearchObject]:
+    def retrieve(self, feature: np.ndarray, k=5, distance_transform: d2s_typing = "exp") -> list[ImageSearchObject]:
         pass
