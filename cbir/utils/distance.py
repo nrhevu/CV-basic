@@ -5,32 +5,45 @@ from typing import Literal
 import numpy as np
 from scipy import spatial
 
+d2s_typing = Literal["exp", "log", "logistic", "gaussian", "inverse"]
+def get_d2s_transform(
+    distance_transform: d2s_typing,
+    **kwargs,
+) -> callable:
+    """
+    Returns a callable that transforms the given distance into a score.
+    
+    Parameters
+    ----------
+    distance_transform : str
+        The type of distance transform to use. One of 'exp', 'log', 'logistic', 'gaussian', 'inverse'.
+    **kwargs : dict
+        Additional keyword arguments to pass to the chosen transform. For example, the 'gaussian' transform
+        requires a 'sigma' parameter.
+    
+    Returns
+    -------
+    callable
+        A function that takes a distance and returns a transformed score.
+    """
+    if distance_transform == "exp":
+        return lambda x: np.exp(-x)
+    elif distance_transform == "log":
+        return lambda x: -np.log(x)
+    elif distance_transform == "logistic":
+        return lambda x: 1 / (1 + np.exp(-x))
+    elif distance_transform == "gaussian":
+        sigma = kwargs.get("sigma", 1)
+        return lambda x: np.exp(-(x**2) / (2 * sigma**2))
+    elif distance_transform == "inverse":
+        return lambda x: 1 / 1 + x
+    else:
+        raise ValueError(f"Invalid distance transform: {distance_transform}")
+
 
 def distance(
     v1, v2, d_type: Literal["absolute", "cosine", "square", "d2-norm"] = "cosine"
 ):
-    """
-    Calculate distance between two vectors
-
-    Parameters
-    ----------
-    v1 : array
-        vector 1
-    v2 : array
-        vector 2
-    d_type : str, optional
-        type of distance to calculate, by default "cosine"
-
-        - "absolute": absolute difference
-        - "cosine": cosine distance
-        - "square": square difference
-        - "d2-norm": D2 norm
-
-    Returns
-    -------
-    float
-        distance between two vectors
-    """
     assert v1.shape == v2.shape, "shape of two vectors need to be same!"
 
     if d_type == "absolute":
