@@ -1,0 +1,4 @@
+python ensemble_sift_color.py
+python resnet_knn_gpu_eval.py
+python sift_knn_eval.py
+python histogram_knn_eval.py
