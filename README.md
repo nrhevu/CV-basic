@@ -14,3 +14,10 @@ pip install split-folders
 import splitfolders
 splitfolders.ratio('data/caltech-101', output="data/caltech101", seed=1337, ratio=(0.7, 0.15,0.15)) 
 ```
+
+### Reproduce result
+* All results are stored in `out/` directory
+
+* Install dependencies: `pip install -r requirements.txt`
+
+* Run `bash.sh` to run evaluation on 4 methods of feature extraction: color histogram, sift description, resnet and ensemble.
