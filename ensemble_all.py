@@ -12,8 +12,8 @@ from PIL import Image
 
 from cbir import *
 from cbir.pipeline import *
-from cbir.utils.grid import grid
 from cbir.utils.ensemble import ensemble_search
+from cbir.utils.grid import grid
 
 # Ignore all warnings
 warnings.filterwarnings("ignore")
@@ -84,35 +84,46 @@ sift_array_store = NPArrayStore(retrieve=KNNRetrieval(metric="manhattan"))
 
 rgb_histogram = RGBHistogram(n_bin=4, h_type="region")
 color_array_store = NPArrayStore(retrieve=KNNRetrieval(metric="cosine"))
-    
+
+resnet = ResNetExtractor(model="resnet152", device="cuda")
+resnet_array_store = NPArrayStore(retrieve=KNNRetrieval(metric="cosine"))
 # Fitting siftbow with train data
 print("Fitting BOW for n_clusters kmeans: ", 96)
 train_img = []
 for images, labels in tqdm(valloader):
     images = (images.numpy().transpose(0,2,3,1) * 255).astype(np.uint8)
     train_img.append(images)
-        
+
 train_img = np.concatenate(train_img)
 siftbow.fit(train_img, k=96)
 
 cbir_sift = CBIR(siftbow, sift_array_store)
 cbir_color = CBIR(rgb_histogram, color_array_store)
-    
+cbir_resnet = CBIR(resnet, resnet_array_store)
+
 # Indexing
 start = time()
 for images, labels in tqdm(dataloader, desc="Indexing"):
+    cbir_resnet.indexing(images.numpy())
     images = (images.numpy().transpose(0,2,3,1) * 255).astype(np.uint8)
     cbir_sift.indexing(images)
     cbir_color.indexing(images)
 avg_indexing_time = round((time() - start) / len(dataset), 6)
 
-ks = [100, 1000, len(dataset)] # Top K each algorithm
-d2ss = ["exp", "log", "logistic", "gaussian", "inverse"] # Distance to Score Function
-weights = [(0.2, 0.8), (0.4, 0.6), (0.5, 0.5), (0.6, 0.4), (0.8, 0.2)] # Weights for each algorithm
+ks = [len(dataset)] # Top K each algorithm
+d2ss = ["exp"] # Distance to Score Function
+weights = [
+    (round(0.8 * 0.2, 2), round(0.2 * 0.2, 2), 0.8),
+    (round(0.8 * 0.4, 2), round(0.2 * 0.4, 2), 0.6),
+    (round(0.8 * 0.5, 2), round(0.2 * 0.5, 2), 0.5),
+    (round(0.8 * 0.6, 2), round(0.2 * 0.6, 2), 0.4),
+    (round(0.8 * 0.8, 2), round(0.2 * 0.8, 2), 0.2),
+]  # Weights for each algorithm
 cache = {"sift":{},
-         "color": {}}
+         "color": {},
+         "resnet": {}}
 for k, d2s, weight in grid(ks, d2ss, weights):
-    print("Evaluate for init k: ", k, " with d2s: ", d2s, " with weight: ", weight, " (sift vs color)")
+    print("Evaluate for init k: ", k, " with d2s: ", d2s, " with weight: ", weight, " (sift vs color vs resnet)")
     # Retrieval
     start = time()
     rs = []
@@ -124,16 +135,24 @@ for k, d2s, weight in grid(ks, d2ss, weights):
             try:
                 cbir_sift_result = cache["sift"][f"{image_count}-{k}-{d2s}"]
                 cbir_color_result = cache["color"][f"{image_count}-{k}-{d2s}"]
+                cbir_resnet_result = cache["resnet"][f"{image_count}-{k}-{d2s}"]
             except KeyError:
                 cbir_sift_result = cbir_sift.retrieve(image, k=k, distance_transform=d2s)
                 cache["sift"][f"{image_count}-{k}-{d2s}"] = cbir_sift_result
                 cbir_color_result = cbir_color.retrieve(image, k=k, distance_transform=d2s)
                 cache["color"][f"{image_count}-{k}-{d2s}"] = cbir_color_result
+                cbir_resnet_result = cbir_resnet.retrieve(
+                    np.expand_dims(image.transpose(2, 0, 1), 0) / 255,
+                    k=k,
+                    distance_transform=d2s,
+                )[0]
+                cache["resnet"][f"{image_count}-{k}-{d2s}"] = cbir_resnet_result
             image_count += 1
             rs.append(
                 ensemble_search(
                     cbir_sift_result,
                     cbir_color_result,
+                    cbir_resnet_result,
                     weights=weight,
                     datalength=len(dataset),
                     k = 1000
@@ -183,13 +202,13 @@ for k, d2s, weight in grid(ks, d2ss, weights):
     avg_recall10 = round(np.mean(recall10), 6)
     avg_recall100 = round(np.mean(recall100), 6)
     avg_recall1000 = round(np.mean(recall1000), 6)
-    
+
     # Store evaluation results
     new_row = pd.DataFrame(
         {
             "k": [k],
             "distance2score": [d2s],
-            "weight(sift vs color)": [weight],
+            "weight(sift vs color vs resnet)": [weight],
             "map@1": [map1],
             "map@5": [map5],
             "map@10": [map10],
@@ -221,5 +240,5 @@ for k, d2s, weight in grid(ks, d2ss, weights):
         "avg_indexing_time: ", avg_indexing_time,
         "avg_retrieval_time: ", avg_retrieval_time,
     )
-    
-eval.to_csv("out/ensemble_sift_color_knn_eval.csv", index=False)
+
+eval.to_csv("out/ensemble_sift_color_resnet_knn_eval.csv", index=False)

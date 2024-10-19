@@ -67,6 +67,11 @@ eval = pd.DataFrame(
         "hit_rate@1",
         "hit_rate@5",
         "hit_rate@10",
+        "recall@1",
+        "recall@5",
+        "recall@10",
+        "recall@100",
+        "recall@1000",
         "avg_indexing_time",
         "avg_retrieval_time",
         "fitting_time",
@@ -115,17 +120,22 @@ for k in [32, 64, 96, 128, 256]:
         for images, labels in tqdm(testloader, desc="Retrieval"):
             images = (images.numpy().transpose(0,2,3,1) * 255).astype(np.uint8)
             for image in images:
-                rs.append(cbir.retrieve(image, k=10))
+                rs.append(cbir.retrieve(image, k=1000))
             ground_truth.extend(labels)
         avg_retrieval_time = round((time() - start) / len(dataset), 6)
 
         # Evaluation
         ap1 = []
         hit1 = []
+        recall1 = []
         ap5 = []
         hit5 = []
+        recall5 = []
         ap10 = []
         hit10 = []
+        recall10 = []
+        recall100 = []
+        recall1000 = [] 
         for r, g in zip(rs, ground_truth):
             predicted = []
             for i in r:
@@ -133,17 +143,28 @@ for k in [32, 64, 96, 128, 256]:
             class_preds = np.take(dataset.targets, predicted, axis=0)
             ap1.append(average_precision(class_preds.tolist(), [g.tolist()], 1))
             hit1.append(hit_rate(class_preds.tolist(), [g.tolist()], 1))
+            recall1.append(recall(predicted, np.where(np.isin(np.array(dataset.targets), [g.tolist()]))[0], 1))
             ap5.append(average_precision(class_preds.tolist(), [g.tolist()], 5))
             hit5.append(hit_rate(class_preds.tolist(), [g.tolist()], 5))
+            recall5.append(recall(predicted, np.where(np.isin(np.array(dataset.targets), [g.tolist()]))[0], 5))
             ap10.append(average_precision(class_preds.tolist(), [g.tolist()], 10))
             hit10.append(hit_rate(class_preds.tolist(), [g.tolist()], 10))
+            recall10.append(recall(predicted, np.where(np.isin(np.array(dataset.targets), [g.tolist()]))[0], 10))
+            recall100.append(recall(predicted, np.where(np.isin(np.array(dataset.targets), [g.tolist()]))[0], 100))
+            recall1000.append(recall(predicted, np.where(np.isin(np.array(dataset.targets), [g.tolist()]))[0], 1000))
+
 
         map1 = round(np.mean(ap1), 6)
         avg_hit1 = round(np.mean(hit1), 6)
+        avg_recall1 = round(np.mean(recall1), 6)
         map5 = round(np.mean(ap5), 6)
         avg_hit5 = round(np.mean(hit5), 6)
+        avg_recall15 = round(np.mean(recall5), 6)
         map10 = round(np.mean(ap10), 6)
         avg_hit10 = round(np.mean(hit10), 6)
+        avg_recall10 = round(np.mean(recall10), 6)
+        avg_recall100 = round(np.mean(recall100), 6)
+        avg_recall1000 = round(np.mean(recall1000), 6)
         
         new_row = pd.DataFrame(
             {
@@ -156,6 +177,11 @@ for k in [32, 64, 96, 128, 256]:
                 "hit_rate@1": [avg_hit1],
                 "hit_rate@5": [avg_hit5],
                 "hit_rate@10": [avg_hit10],
+                "recall@1": [avg_recall1],
+                "recall@5": [avg_recall15],
+                "recall@10": [avg_recall10],
+                "recall@100": [avg_recall100],
+                "recall@1000": [avg_recall1000],
                 "avg_indexing_time": [avg_indexing_time],
                 "avg_retrieval_time": [avg_retrieval_time],
                 "fitting_time": [fitting_time],
@@ -169,6 +195,11 @@ for k in [32, 64, 96, 128, 256]:
             "hit_rate@1: ", avg_hit1,
             "hit_rate@5: ", avg_hit5,
             "hit_rate@10: ", avg_hit10,
+            "recall@1: ", avg_recall1,
+            "recall@5: ", avg_recall15,
+            "recall@10: ", avg_recall10,
+            "recall@100: ", avg_recall100,
+            "recall@1000: ", avg_recall1000,
             "avg_indexing_time: ", avg_indexing_time,
             "avg_retrieval_time: ", avg_retrieval_time,
             "fitting_time: ", fitting_time
