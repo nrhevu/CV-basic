@@ -91,7 +91,7 @@ train_img = np.concatenate(train_img)
 siftbow.fit(train_img, k=96)
 
 cbir_sift = CBIR(siftbow, sift_array_store)
-cbir_color = CBIR(siftbow, color_array_store)
+cbir_color = CBIR(rgb_histogram, color_array_store)
     
 # Indexing
 start = time()
@@ -101,22 +101,34 @@ for images, labels in tqdm(dataloader, desc="Indexing"):
     cbir_color.indexing(images)
 avg_indexing_time = round((time() - start) / len(dataset), 6)
 
-ks = [100, 1000] # Top K each algorithm
+ks = [100, 1000, len(dataset)] # Top K each algorithm
 d2ss = ["exp", "log", "logistic", "gaussian", "inverse"] # Distance to Score Function
-weights = [(0.2, 0.8), (0.4, 0.6), (0.6, 0.4), (0.8, 0.2)] # Weights for each algorithm
+weights = [(0.2, 0.8), (0.4, 0.6), (0.5, 0.5), (0.6, 0.4), (0.8, 0.2)] # Weights for each algorithm
+cache = {"sift":{},
+         "color": {}}
 for k, d2s, weight in grid(ks, d2ss, weights):
-    print("Evaluate for kmeans cluster: ", k, " with d2s: ", d2s, " with weight: ", weight, " (sift vs color)")
+    print("Evaluate for init k: ", k, " with d2s: ", d2s, " with weight: ", weight, " (sift vs color)")
     # Retrieval
     start = time()
     rs = []
     ground_truth = []
+    image_count = 0
     for images, labels in tqdm(testloader, desc="Retrieval"):
         images = (images.numpy().transpose(0, 2, 3, 1) * 255).astype(np.uint8)
         for image in images:
+            try:
+                cbir_sift_result = cache["sift"][f"{image_count}-{k}-{d2s}"]
+                cbir_color_result = cache["color"][f"{image_count}-{k}-{d2s}"]
+            except KeyError:
+                cbir_sift_result = cbir_sift.retrieve(image, k=k, distance_transform=d2s)
+                cache["sift"][f"{image_count}-{k}-{d2s}"] = cbir_sift_result
+                cbir_color_result = cbir_color.retrieve(image, k=k, distance_transform=d2s)
+                cache["color"][f"{image_count}-{k}-{d2s}"] = cbir_color_result
+            image_count += 1
             rs.append(
                 ensemble_search(
-                    cbir_sift.retrieve(image, k=k, distance_transform=d2s),
-                    cbir_color.retrieve(image, k=k, distance_transform=d2s),
+                    cbir_sift_result,
+                    cbir_color_result,
                     weights=weight,
                     datalength=len(dataset),
                     k = 10
