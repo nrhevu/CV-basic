@@ -12,23 +12,19 @@ from cbir.feature_extractor import (BatchFeatureExtractor, FeatureExtractor,
                                     SingleFeatureExtractor)
 
 
-class EdgeHistogram(SingleFeatureExtractor):
+class FourierDescriptor(SingleFeatureExtractor):
     def __init__(
         self,
         n_slice=10,
         h_type="region",
-        bin=16,
-        edge_detector: Literal["canny", "sobel", "prewitt"] = "canny",
+        num_coeffs=10,
         normalize=True,
         **kwargs,
     ) -> None:
-        self.n_slice = n_slice
+        self.n_sclice = n_slice
+        self.num_coeffs = num_coeffs
         self.h_type = h_type
-        self.bin = bin
         self.normalize = normalize
-        if edge_detector == "sobel":
-            self.ksize = kwargs.get("ksize", 3)
-        self.edge_detector = self._get_edge_detector(edge_detector)
 
     def __call__(self, input: np.ndarray | os.PathLike):
         img = super().read_image(input)
@@ -36,7 +32,7 @@ class EdgeHistogram(SingleFeatureExtractor):
         height, width, channel = img.shape
 
         if self.h_type == "global":
-            hist = self._conv(img)
+            hist = self.__fourier_descriptor(img)
 
         elif self.h_type == "region":
             hist = np.zeros((self.n_slice, self.n_slice, self.bin))
@@ -52,33 +48,38 @@ class EdgeHistogram(SingleFeatureExtractor):
                     img_r = img[
                         h_silce[hs] : h_silce[hs + 1], w_slice[ws] : w_slice[ws + 1]
                     ]  # slice img to regions
-                    hist[hs][ws] = self._conv(img_r)
+                    hist[hs][ws] = self.__fourier_descriptor(img_r)
 
         if self.normalize:
             hist /= np.sum(hist)
 
         return hist.flatten()
 
-    def _conv(self, img):
-        edges = self.edge_detector(img)
-        edges_flat = edges.ravel()
-        hist, bins = np.histogram(edges_flat, bins=self.bin, range=(0, 255))
+    def __fourier_descriptor(self, img):
+        # Convert to grayscale
+        gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY) 
 
-        if self.normalize:
-            hist = hist / np.sum(hist)
+        # Apply Canny edge detection
+        edges = cv2.Canny(gray, 100, 200) 
 
-        return hist
+        # Find contours
+        contours, _ = cv2.findContours(edges, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
-    def _get_edge_detector(self, edge_detector):
-        if edge_detector == "canny":
-            return lambda img: cv2.Canny(img, 100, 200)
-        elif edge_detector == "sobel":
-            def sobel(image, ksize=3):
-                x_edges = cv2.Sobel(image, cv2.CV_64F, 1, 0, ksize=3)
-                y_edges = cv2.Sobel(image, cv2.CV_64F, 0, 1, ksize=3)
-                return np.sqrt(x_edges**2 + y_edges**2)
-            return lambda img: sobel(img, self.ksize)
-        elif edge_detector == "prewitt":
-            raise NotImplementedError("This detector is not implemented yet")
-        else:
-            raise ValueError(f"Invalid edge detector: {edge_detector}")
+        # Select a contour
+        cnt = contours[0]
+
+        # Resample the contour to a fixed number of points
+        epsilon = 0.01 * cv2.arcLength(cnt, True)
+        approx = cv2.approxPolyDP(cnt, epsilon, True)
+
+        # Compute Fourier descriptors
+        fd = cv2.dft(approx.astype(np.float32))
+
+        # Extract magnitude and phase
+        magnitude = cv2.magnitude(fd[:, 0], fd[:, 1])
+        phase = cv2.phase(fd[:, 0], fd[:, 1])
+
+        # Select a subset of Fourier coefficients
+        fd_selected = magnitude[:self.num_coeffs]
+        
+        return fd_selected

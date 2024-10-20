@@ -59,21 +59,20 @@ testloader = torch.utils.data.DataLoader(
 # BEGIN EVALUATION
 eval = pd.DataFrame()
 
-edge_detectors = ["sobel"]
-bins = [8, 32, 128]
+num_coeffs = [10, 20, 30]
 n_slices = [1, 10, 15]
 knn_metrics = ["euclidean", "cosine"]
-for edge_detector, bin, n_slice, metric in grid(edge_detectors, bins, n_slices, knn_metrics):
+for num_coeff, n_slice, metric in grid(num_coeffs, n_slices, knn_metrics):
     if n_slice == 1:
         h_type = "global"
     else: 
         h_type = "region"
-    print("Evaluate for edge_detector: ", edge_detector, "bin: ", bin, " h_type: ", h_type, " n_slice: ", n_slice, " with knn metric: ", metric)
+    print("Evaluate for num_coeffs: ", num_coeffs, " h_type: ", h_type, " n_slice: ", n_slice, " with knn metric: ", metric)
 
     # Initialization
-    edge_histogram = EdgeHistogram(n_slice=n_slice, h_type=h_type, edge_detector=edge_detector)
+    fourier_descriptor = FourierDescriptor(n_slice=n_slice, h_type=h_type, num_coeffs=num_coeff)
     array_store = NPArrayStore(retrieve=KNNRetrieval(metric=metric))
-    cbir = CBIR(edge_histogram, array_store)
+    cbir = CBIR(fourier_descriptor, array_store)
 
     # Indexing
     start = time()
@@ -136,8 +135,7 @@ for edge_detector, bin, n_slice, metric in grid(edge_detectors, bins, n_slices, 
 
     new_row = pd.DataFrame(
         {
-            "edge_detector": [edge_detector],
-            "bin": [bin],
+            "num_coeffs": [num_coeff],
             "htype": [h_type],
             "slice": [n_slice],
             "metric": [metric],
