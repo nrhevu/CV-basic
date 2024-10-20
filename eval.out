@@ -1,3 +1,330 @@
 Evaluate for bins:  2  h_type:  region   with knn metric:  euclidean
 map@1:  0.331058 map@5:  0.267986 map@10:  0.239795 hit_rate@1:  0.331058 hit_rate@5:  0.483276 hit_rate@10:  0.550853 recall@1:  0.003012 recall@5:  0.010598 recall@10:  0.017388 recall@100:  0.078739 recall@1000:  0.310192 avg_indexing_time:  0.000992 avg_retrieval_time:  0.000971
 Evaluate for bins:  2  h_type:  region   with knn metric:  cosine
+map@1:  0.324232 map@5:  0.26744 map@10:  0.239454 hit_rate@1:  0.324232 hit_rate@5:  0.475768 hit_rate@10:  0.554949 recall@1:  0.00294 recall@5:  0.01054 recall@10:  0.017698 recall@100:  0.080455 recall@1000:  0.312565 avg_indexing_time:  0.000998 avg_retrieval_time:  0.001458
+Evaluate for bins:  2  h_type:  global   with knn metric:  euclidean
+map@1:  0.141297 map@5:  0.106758 map@10:  0.099454 hit_rate@1:  0.141297 hit_rate@5:  0.288737 hit_rate@10:  0.382935 recall@1:  0.001118 recall@5:  0.003906 recall@10:  0.007064 recall@100:  0.044466 recall@1000:  0.252985 avg_indexing_time:  0.000994 avg_retrieval_time:  0.000713
+Evaluate for bins:  2  h_type:  global   with knn metric:  cosine
+map@1:  0.138567 map@5:  0.107167 map@10:  0.098157 hit_rate@1:  0.138567 hit_rate@5:  0.296246 hit_rate@10:  0.386348 recall@1:  0.00113 recall@5:  0.003966 recall@10:  0.007086 recall@100:  0.044571 recall@1000:  0.254884 avg_indexing_time:  0.000988 avg_retrieval_time:  0.001246
+Evaluate for bins:  4  h_type:  region   with knn metric:  euclidean
+map@1:  0.369966 map@5:  0.292014 map@10:  0.262184 hit_rate@1:  0.369966 hit_rate@5:  0.498294 hit_rate@10:  0.584983 recall@1:  0.003627 recall@5:  0.011819 recall@10:  0.019838 recall@100:  0.083359 recall@1000:  0.318225 avg_indexing_time:  0.001009 avg_retrieval_time:  0.001027
+Evaluate for bins:  4  h_type:  region   with knn metric:  cosine
+map@1:  0.373379 map@5:  0.298976 map@10:  0.263481 hit_rate@1:  0.373379 hit_rate@5:  0.509215 hit_rate@10:  0.578157 recall@1:  0.003735 recall@5:  0.012632 recall@10:  0.020159 recall@100:  0.088442 recall@1000:  0.322851 avg_indexing_time:  0.000988 avg_retrieval_time:  0.003767
+Evaluate for bins:  4  h_type:  global   with knn metric:  euclidean
+map@1:  0.243686 map@5:  0.194266 map@10:  0.175973 hit_rate@1:  0.243686 hit_rate@5:  0.411604 hit_rate@10:  0.488055 recall@1:  0.001998 recall@5:  0.007104 recall@10:  0.01214 recall@100:  0.06312 recall@1000:  0.282745 avg_indexing_time:  0.000986 avg_retrieval_time:  0.000991
+Evaluate for bins:  4  h_type:  global   with knn metric:  cosine
+map@1:  0.238908 map@5:  0.193993 map@10:  0.175563 hit_rate@1:  0.238908 hit_rate@5:  0.417747 hit_rate@10:  0.486007 recall@1:  0.002068 recall@5:  0.007408 recall@10:  0.012499 recall@100:  0.063244 recall@1000:  0.288249 avg_indexing_time:  0.000996 avg_retrieval_time:  0.001339
+Evaluate for bins:  8  h_type:  region   with knn metric:  euclidean
+map@1:  0.352901 map@5:  0.273311 map@10:  0.23884 hit_rate@1:  0.352901 hit_rate@5:  0.483276 hit_rate@10:  0.548123 recall@1:  0.003375 recall@5:  0.011001 recall@10:  0.017678 recall@100:  0.076686 recall@1000:  0.308355 avg_indexing_time:  0.001082 avg_retrieval_time:  0.002736
+Evaluate for bins:  8  h_type:  region   with knn metric:  cosine
+map@1:  0.356997 map@5:  0.279317 map@10:  0.248601 hit_rate@1:  0.356997 hit_rate@5:  0.486007 hit_rate@10:  0.546758 recall@1:  0.003496 recall@5:  0.011554 recall@10:  0.018921 recall@100:  0.084385 recall@1000:  0.325361 avg_indexing_time:  0.001062 avg_retrieval_time:  0.025872
+Evaluate for bins:  8  h_type:  global   with knn metric:  euclidean
+map@1:  0.275085 map@5:  0.216246 map@10:  0.189283 hit_rate@1:  0.275085 hit_rate@5:  0.427304 hit_rate@10:  0.48942 recall@1:  0.002263 recall@5:  0.007664 recall@10:  0.012529 recall@100:  0.061587 recall@1000:  0.292441 avg_indexing_time:  0.001007 avg_retrieval_time:  0.002483
+Evaluate for bins:  8  h_type:  global   with knn metric:  cosine
+map@1:  0.269625 map@5:  0.207918 map@10:  0.182935 hit_rate@1:  0.269625 hit_rate@5:  0.417065 hit_rate@10:  0.496246 recall@1:  0.002455 recall@5:  0.00777 recall@10:  0.012896 recall@100:  0.063367 recall@1000:  0.297811 avg_indexing_time:  0.001001 avg_retrieval_time:  0.002484
+Evaluate for bins:  12  h_type:  region   with knn metric:  euclidean
+map@1:  0.327645 map@5:  0.254334 map@10:  0.221365 hit_rate@1:  0.327645 hit_rate@5:  0.458703 hit_rate@10:  0.529693 recall@1:  0.00304 recall@5:  0.0106 recall@10:  0.017018 recall@100:  0.073402 recall@1000:  0.298012 avg_indexing_time:  0.001484 avg_retrieval_time:  0.007101
+Evaluate for bins:  12  h_type:  region   with knn metric:  cosine
+map@1:  0.338567 map@5:  0.272901 map@10:  0.239181 hit_rate@1:  0.338567 hit_rate@5:  0.479181 hit_rate@10:  0.543345 recall@1:  0.003345 recall@5:  0.011587 recall@10:  0.018738 recall@100:  0.083657 recall@1000:  0.322693 avg_indexing_time:  0.001499 avg_retrieval_time:  0.067846
+Evaluate for bins:  12  h_type:  global   with knn metric:  euclidean
+map@1:  0.285324 map@5:  0.215017 map@10:  0.190512 hit_rate@1:  0.285324 hit_rate@5:  0.410239 hit_rate@10:  0.487372 recall@1:  0.002313 recall@5:  0.007455 recall@10:  0.012528 recall@100:  0.061049 recall@1000:  0.296934 avg_indexing_time:  0.001011 avg_retrieval_time:  0.005967
+Evaluate for bins:  12  h_type:  global   with knn metric:  cosine
+map@1:  0.278498 map@5:  0.208464 map@10:  0.181229 hit_rate@1:  0.278498 hit_rate@5:  0.410239 hit_rate@10:  0.481911 recall@1:  0.002527 recall@5:  0.007385 recall@10:  0.01234 recall@100:  0.062641 recall@1000:  0.300355 avg_indexing_time:  0.000999 avg_retrieval_time:  0.007284
+Fitting BOW for n_clusters kmeans:  32
+Fit Kmeans clustering to create BOW
+Fit IDF for TF-IDF Transformation
+Complete Fitting SIFT BOW Extractor
+Evaluate for kmeans cluster:  32  vector type:  tfidf  with knn metric:  cosine
+Evaluate for n_clusters kmeans:  32
+map@1:  0.205461 map@5:  0.164232 map@10:  0.149488 hit_rate@1:  0.205461 hit_rate@5:  0.389761 hit_rate@10:  0.479181 recall@1:  0.001975 recall@5:  0.007142 recall@10:  0.012058 recall@100:  0.067544 recall@1000:  0.323383 avg_indexing_time:  0.008164 avg_retrieval_time:  0.005317 fitting_time:  20.962966
+Evaluate for kmeans cluster:  32  vector type:  tfidf  with knn metric:  euclidean
+Evaluate for n_clusters kmeans:  32
+map@1:  0.205461 map@5:  0.164232 map@10:  0.149488 hit_rate@1:  0.205461 hit_rate@5:  0.389761 hit_rate@10:  0.479181 recall@1:  0.001975 recall@5:  0.007142 recall@10:  0.012058 recall@100:  0.067544 recall@1000:  0.323383 avg_indexing_time:  0.008251 avg_retrieval_time:  0.002861 fitting_time:  20.962966
+Evaluate for kmeans cluster:  32  vector type:  tfidf  with knn metric:  manhattan
+Evaluate for n_clusters kmeans:  32
+map@1:  0.211604 map@5:  0.165597 map@10:  0.148259 hit_rate@1:  0.211604 hit_rate@5:  0.393174 hit_rate@10:  0.490102 recall@1:  0.002018 recall@5:  0.007452 recall@10:  0.012401 recall@100:  0.070791 recall@1000:  0.337613 avg_indexing_time:  0.008192 avg_retrieval_time:  0.002848 fitting_time:  20.962966
+Evaluate for kmeans cluster:  32  vector type:  bow  with knn metric:  cosine
+Evaluate for n_clusters kmeans:  32
+map@1:  0.205461 map@5:  0.164232 map@10:  0.149488 hit_rate@1:  0.205461 hit_rate@5:  0.389761 hit_rate@10:  0.479181 recall@1:  0.001975 recall@5:  0.007142 recall@10:  0.012058 recall@100:  0.067544 recall@1000:  0.323383 avg_indexing_time:  0.008211 avg_retrieval_time:  0.00538 fitting_time:  20.962966
+Evaluate for kmeans cluster:  32  vector type:  bow  with knn metric:  euclidean
+Evaluate for n_clusters kmeans:  32
+map@1:  0.205461 map@5:  0.164232 map@10:  0.149488 hit_rate@1:  0.205461 hit_rate@5:  0.389761 hit_rate@10:  0.479181 recall@1:  0.001975 recall@5:  0.007142 recall@10:  0.012058 recall@100:  0.067544 recall@1000:  0.323383 avg_indexing_time:  0.008154 avg_retrieval_time:  0.002898 fitting_time:  20.962966
+Evaluate for kmeans cluster:  32  vector type:  bow  with knn metric:  manhattan
+Evaluate for n_clusters kmeans:  32
+map@1:  0.211604 map@5:  0.165597 map@10:  0.148259 hit_rate@1:  0.211604 hit_rate@5:  0.393174 hit_rate@10:  0.490102 recall@1:  0.002018 recall@5:  0.007452 recall@10:  0.012401 recall@100:  0.070791 recall@1000:  0.337613 avg_indexing_time:  0.00824 avg_retrieval_time:  0.002835 fitting_time:  20.962966
+Fitting BOW for n_clusters kmeans:  64
+Fit Kmeans clustering to create BOW
+Fit IDF for TF-IDF Transformation
+Complete Fitting SIFT BOW Extractor
+Evaluate for kmeans cluster:  64  vector type:  tfidf  with knn metric:  cosine
+Evaluate for n_clusters kmeans:  64
+map@1:  0.204096 map@5:  0.166962 map@10:  0.15058 hit_rate@1:  0.204096 hit_rate@5:  0.39727 hit_rate@10:  0.495563 recall@1:  0.002139 recall@5:  0.007708 recall@10:  0.013283 recall@100:  0.070053 recall@1000:  0.320327 avg_indexing_time:  0.008273 avg_retrieval_time:  0.005517 fitting_time:  30.953784
+Evaluate for kmeans cluster:  64  vector type:  tfidf  with knn metric:  euclidean
+Evaluate for n_clusters kmeans:  64
+map@1:  0.204096 map@5:  0.166962 map@10:  0.15058 hit_rate@1:  0.204096 hit_rate@5:  0.39727 hit_rate@10:  0.495563 recall@1:  0.002139 recall@5:  0.007708 recall@10:  0.013283 recall@100:  0.070053 recall@1000:  0.320327 avg_indexing_time:  0.008147 avg_retrieval_time:  0.002911 fitting_time:  30.953784
+Evaluate for kmeans cluster:  64  vector type:  tfidf  with knn metric:  manhattan
+Evaluate for n_clusters kmeans:  64
+map@1:  0.217065 map@5:  0.172014 map@10:  0.155836 hit_rate@1:  0.217065 hit_rate@5:  0.401365 hit_rate@10:  0.514676 recall@1:  0.00227 recall@5:  0.008095 recall@10:  0.01434 recall@100:  0.077102 recall@1000:  0.348248 avg_indexing_time:  0.008133 avg_retrieval_time:  0.002857 fitting_time:  30.953784
+Evaluate for kmeans cluster:  64  vector type:  bow  with knn metric:  cosine
+Evaluate for n_clusters kmeans:  64
+map@1:  0.204096 map@5:  0.166962 map@10:  0.15058 hit_rate@1:  0.204096 hit_rate@5:  0.39727 hit_rate@10:  0.495563 recall@1:  0.002139 recall@5:  0.007708 recall@10:  0.013283 recall@100:  0.070053 recall@1000:  0.320327 avg_indexing_time:  0.008321 avg_retrieval_time:  0.00551 fitting_time:  30.953784
+Evaluate for kmeans cluster:  64  vector type:  bow  with knn metric:  euclidean
+Evaluate for n_clusters kmeans:  64
+map@1:  0.204096 map@5:  0.166962 map@10:  0.15058 hit_rate@1:  0.204096 hit_rate@5:  0.39727 hit_rate@10:  0.495563 recall@1:  0.002139 recall@5:  0.007708 recall@10:  0.013283 recall@100:  0.070053 recall@1000:  0.320327 avg_indexing_time:  0.008275 avg_retrieval_time:  0.00292 fitting_time:  30.953784
+Evaluate for kmeans cluster:  64  vector type:  bow  with knn metric:  manhattan
+Evaluate for n_clusters kmeans:  64
+map@1:  0.217065 map@5:  0.172014 map@10:  0.155836 hit_rate@1:  0.217065 hit_rate@5:  0.401365 hit_rate@10:  0.514676 recall@1:  0.00227 recall@5:  0.008095 recall@10:  0.01434 recall@100:  0.077102 recall@1000:  0.348248 avg_indexing_time:  0.008282 avg_retrieval_time:  0.002846 fitting_time:  30.953784
+Fitting BOW for n_clusters kmeans:  96
+Fit Kmeans clustering to create BOW
+Fit IDF for TF-IDF Transformation
+Complete Fitting SIFT BOW Extractor
+Evaluate for kmeans cluster:  96  vector type:  tfidf  with knn metric:  cosine
+Evaluate for n_clusters kmeans:  96
+map@1:  0.205461 map@5:  0.165734 map@10:  0.143959 hit_rate@1:  0.205461 hit_rate@5:  0.384983 hit_rate@10:  0.492833 recall@1:  0.002265 recall@5:  0.008179 recall@10:  0.013076 recall@100:  0.06592 recall@1000:  0.296878 avg_indexing_time:  0.008306 avg_retrieval_time:  0.005895 fitting_time:  40.023622
+Evaluate for kmeans cluster:  96  vector type:  tfidf  with knn metric:  euclidean
+Evaluate for n_clusters kmeans:  96
+map@1:  0.205461 map@5:  0.165734 map@10:  0.143959 hit_rate@1:  0.205461 hit_rate@5:  0.384983 hit_rate@10:  0.492833 recall@1:  0.002265 recall@5:  0.008179 recall@10:  0.013076 recall@100:  0.06592 recall@1000:  0.296878 avg_indexing_time:  0.008298 avg_retrieval_time:  0.002899 fitting_time:  40.023622
+Evaluate for kmeans cluster:  96  vector type:  tfidf  with knn metric:  manhattan
+Evaluate for n_clusters kmeans:  96
+map@1:  0.221843 map@5:  0.178703 map@10:  0.154812 hit_rate@1:  0.221843 hit_rate@5:  0.414334 hit_rate@10:  0.517406 recall@1:  0.002413 recall@5:  0.008944 recall@10:  0.01491 recall@100:  0.074755 recall@1000:  0.333368 avg_indexing_time:  0.008094 avg_retrieval_time:  0.002874 fitting_time:  40.023622
+Evaluate for kmeans cluster:  96  vector type:  bow  with knn metric:  cosine
+Evaluate for n_clusters kmeans:  96
+map@1:  0.205461 map@5:  0.165734 map@10:  0.143959 hit_rate@1:  0.205461 hit_rate@5:  0.384983 hit_rate@10:  0.492833 recall@1:  0.002265 recall@5:  0.008179 recall@10:  0.013076 recall@100:  0.06592 recall@1000:  0.296878 avg_indexing_time:  0.008244 avg_retrieval_time:  0.005679 fitting_time:  40.023622
+Evaluate for kmeans cluster:  96  vector type:  bow  with knn metric:  euclidean
+Evaluate for n_clusters kmeans:  96
+map@1:  0.205461 map@5:  0.165734 map@10:  0.143959 hit_rate@1:  0.205461 hit_rate@5:  0.384983 hit_rate@10:  0.492833 recall@1:  0.002265 recall@5:  0.008179 recall@10:  0.013076 recall@100:  0.06592 recall@1000:  0.296878 avg_indexing_time:  0.008176 avg_retrieval_time:  0.002938 fitting_time:  40.023622
+Evaluate for kmeans cluster:  96  vector type:  bow  with knn metric:  manhattan
+Evaluate for n_clusters kmeans:  96
+map@1:  0.221843 map@5:  0.178703 map@10:  0.154812 hit_rate@1:  0.221843 hit_rate@5:  0.414334 hit_rate@10:  0.517406 recall@1:  0.002413 recall@5:  0.008944 recall@10:  0.01491 recall@100:  0.074755 recall@1000:  0.333368 avg_indexing_time:  0.008263 avg_retrieval_time:  0.002847 fitting_time:  40.023622
+Fitting BOW for n_clusters kmeans:  128
+Fit Kmeans clustering to create BOW
+Fit IDF for TF-IDF Transformation
+Complete Fitting SIFT BOW Extractor
+Evaluate for kmeans cluster:  128  vector type:  tfidf  with knn metric:  cosine
+Evaluate for n_clusters kmeans:  128
+map@1:  0.208191 map@5:  0.166962 map@10:  0.1443 hit_rate@1:  0.208191 hit_rate@5:  0.391809 hit_rate@10:  0.484642 recall@1:  0.002254 recall@5:  0.007971 recall@10:  0.012924 recall@100:  0.065877 recall@1000:  0.298475 avg_indexing_time:  0.00824 avg_retrieval_time:  0.005746 fitting_time:  49.517996
+Evaluate for kmeans cluster:  128  vector type:  tfidf  with knn metric:  euclidean
+Evaluate for n_clusters kmeans:  128
+map@1:  0.208191 map@5:  0.166962 map@10:  0.1443 hit_rate@1:  0.208191 hit_rate@5:  0.391809 hit_rate@10:  0.484642 recall@1:  0.002254 recall@5:  0.007971 recall@10:  0.012924 recall@100:  0.065877 recall@1000:  0.298475 avg_indexing_time:  0.008304 avg_retrieval_time:  0.002976 fitting_time:  49.517996
+Evaluate for kmeans cluster:  128  vector type:  tfidf  with knn metric:  manhattan
+Evaluate for n_clusters kmeans:  128
+map@1:  0.215017 map@5:  0.175563 map@10:  0.155154 hit_rate@1:  0.215017 hit_rate@5:  0.404096 hit_rate@10:  0.512628 recall@1:  0.002474 recall@5:  0.008643 recall@10:  0.0147 recall@100:  0.076088 recall@1000:  0.343889 avg_indexing_time:  0.008166 avg_retrieval_time:  0.002879 fitting_time:  49.517996
+Evaluate for kmeans cluster:  128  vector type:  bow  with knn metric:  cosine
+Evaluate for n_clusters kmeans:  128
+map@1:  0.208191 map@5:  0.166962 map@10:  0.1443 hit_rate@1:  0.208191 hit_rate@5:  0.391809 hit_rate@10:  0.484642 recall@1:  0.002254 recall@5:  0.007971 recall@10:  0.012924 recall@100:  0.065877 recall@1000:  0.298475 avg_indexing_time:  0.008287 avg_retrieval_time:  0.005987 fitting_time:  49.517996
+Evaluate for kmeans cluster:  128  vector type:  bow  with knn metric:  euclidean
+Evaluate for n_clusters kmeans:  128
+map@1:  0.208191 map@5:  0.166962 map@10:  0.1443 hit_rate@1:  0.208191 hit_rate@5:  0.391809 hit_rate@10:  0.484642 recall@1:  0.002254 recall@5:  0.007971 recall@10:  0.012924 recall@100:  0.065877 recall@1000:  0.298475 avg_indexing_time:  0.008283 avg_retrieval_time:  0.003006 fitting_time:  49.517996
+Evaluate for kmeans cluster:  128  vector type:  bow  with knn metric:  manhattan
+Evaluate for n_clusters kmeans:  128
+map@1:  0.215017 map@5:  0.175563 map@10:  0.155154 hit_rate@1:  0.215017 hit_rate@5:  0.404096 hit_rate@10:  0.512628 recall@1:  0.002474 recall@5:  0.008643 recall@10:  0.0147 recall@100:  0.076088 recall@1000:  0.343889 avg_indexing_time:  0.008294 avg_retrieval_time:  0.002885 fitting_time:  49.517996
+Fitting BOW for n_clusters kmeans:  256
+Fit Kmeans clustering to create BOW
+Fit IDF for TF-IDF Transformation
+Complete Fitting SIFT BOW Extractor
+Evaluate for kmeans cluster:  256  vector type:  tfidf  with knn metric:  cosine
+Evaluate for n_clusters kmeans:  256
+map@1:  0.185666 map@5:  0.151536 map@10:  0.134471 hit_rate@1:  0.185666 hit_rate@5:  0.353584 hit_rate@10:  0.461433 recall@1:  0.001867 recall@5:  0.007289 recall@10:  0.012354 recall@100:  0.058084 recall@1000:  0.272928 avg_indexing_time:  0.008459 avg_retrieval_time:  0.006563 fitting_time:  86.50311
+Evaluate for kmeans cluster:  256  vector type:  tfidf  with knn metric:  euclidean
+Evaluate for n_clusters kmeans:  256
+map@1:  0.185666 map@5:  0.151536 map@10:  0.134471 hit_rate@1:  0.185666 hit_rate@5:  0.353584 hit_rate@10:  0.461433 recall@1:  0.001867 recall@5:  0.007289 recall@10:  0.012354 recall@100:  0.058084 recall@1000:  0.272928 avg_indexing_time:  0.008313 avg_retrieval_time:  0.00315 fitting_time:  86.50311
+Evaluate for kmeans cluster:  256  vector type:  tfidf  with knn metric:  manhattan
+Evaluate for n_clusters kmeans:  256
+map@1:  0.188396 map@5:  0.154676 map@10:  0.139659 hit_rate@1:  0.188396 hit_rate@5:  0.359044 hit_rate@10:  0.453242 recall@1:  0.001966 recall@5:  0.007702 recall@10:  0.013112 recall@100:  0.063983 recall@1000:  0.314161 avg_indexing_time:  0.008386 avg_retrieval_time:  0.002934 fitting_time:  86.50311
+Evaluate for kmeans cluster:  256  vector type:  bow  with knn metric:  cosine
+Evaluate for n_clusters kmeans:  256
+map@1:  0.185666 map@5:  0.151536 map@10:  0.134471 hit_rate@1:  0.185666 hit_rate@5:  0.353584 hit_rate@10:  0.461433 recall@1:  0.001867 recall@5:  0.007289 recall@10:  0.012354 recall@100:  0.058084 recall@1000:  0.272928 avg_indexing_time:  0.008225 avg_retrieval_time:  0.006406 fitting_time:  86.50311
+Evaluate for kmeans cluster:  256  vector type:  bow  with knn metric:  euclidean
+Evaluate for n_clusters kmeans:  256
+map@1:  0.185666 map@5:  0.151536 map@10:  0.134471 hit_rate@1:  0.185666 hit_rate@5:  0.353584 hit_rate@10:  0.461433 recall@1:  0.001867 recall@5:  0.007289 recall@10:  0.012354 recall@100:  0.058084 recall@1000:  0.272928 avg_indexing_time:  0.008303 avg_retrieval_time:  0.003149 fitting_time:  86.50311
+Evaluate for kmeans cluster:  256  vector type:  bow  with knn metric:  manhattan
+Evaluate for n_clusters kmeans:  256
+map@1:  0.188396 map@5:  0.154676 map@10:  0.139659 hit_rate@1:  0.188396 hit_rate@5:  0.359044 hit_rate@10:  0.453242 recall@1:  0.001966 recall@5:  0.007702 recall@10:  0.013112 recall@100:  0.063983 recall@1000:  0.314161 avg_indexing_time:  0.008362 avg_retrieval_time:  0.002945 fitting_time:  86.50311
+Evaluate for model:  resnet18  with knn metric:  euclidean
+map@1:  0.798635 map@5:  0.745256 map@10:  0.704573 hit_rate@1:  0.798635 hit_rate@5:  0.912628 hit_rate@10:  0.939249 recall@1:  0.012276 recall@5:  0.055231 recall@10:  0.101105 recall@100:  0.424683 recall@1000:  0.819254 avg_indexing_time:  0.001124 avg_retrieval_time:  0.001946
+Evaluate for model:  resnet18  with knn metric:  cosine
+map@1:  0.830034 map@5:  0.773788 map@10:  0.73802 hit_rate@1:  0.830034 hit_rate@5:  0.931741 hit_rate@10:  0.949488 recall@1:  0.012926 recall@5:  0.058723 recall@10:  0.109164 recall@100:  0.473179 recall@1000:  0.87688 avg_indexing_time:  0.001075 avg_retrieval_time:  0.003492
+Evaluate for model:  resnet34  with knn metric:  euclidean
+map@1:  0.838908 map@5:  0.787577 map@10:  0.750444 hit_rate@1:  0.838908 hit_rate@5:  0.931058 hit_rate@10:  0.957679 recall@1:  0.01328 recall@5:  0.060532 recall@10:  0.113124 recall@100:  0.485548 recall@1000:  0.867162 avg_indexing_time:  0.001206 avg_retrieval_time:  0.002053
+Evaluate for model:  resnet34  with knn metric:  cosine
+map@1:  0.853925 map@5:  0.813515 map@10:  0.777884 hit_rate@1:  0.853925 hit_rate@5:  0.948123 hit_rate@10:  0.967235 recall@1:  0.013635 recall@5:  0.063591 recall@10:  0.119369 recall@100:  0.532325 recall@1000:  0.916735 avg_indexing_time:  0.001199 avg_retrieval_time:  0.003521
+Evaluate for model:  resnet50  with knn metric:  euclidean
+map@1:  0.845051 map@5:  0.786212 map@10:  0.75058 hit_rate@1:  0.845051 hit_rate@5:  0.933106 hit_rate@10:  0.957679 recall@1:  0.013334 recall@5:  0.059963 recall@10:  0.112308 recall@100:  0.484118 recall@1000:  0.871346 avg_indexing_time:  0.002949 avg_retrieval_time:  0.004597
+Evaluate for model:  resnet50  with knn metric:  cosine
+map@1:  0.864164 map@5:  0.807918 map@10:  0.775085 hit_rate@1:  0.864164 hit_rate@5:  0.942662 hit_rate@10:  0.963823 recall@1:  0.013846 recall@5:  0.06263 recall@10:  0.117603 recall@100:  0.525629 recall@1000:  0.910529 avg_indexing_time:  0.002932 avg_retrieval_time:  0.014151
+Evaluate for model:  resnet101  with knn metric:  euclidean
+map@1:  0.867577 map@5:  0.817201 map@10:  0.783959 hit_rate@1:  0.867577 hit_rate@5:  0.948805 hit_rate@10:  0.967918 recall@1:  0.013994 recall@5:  0.064536 recall@10:  0.122024 recall@100:  0.524354 recall@1000:  0.895706 avg_indexing_time:  0.003545 avg_retrieval_time:  0.004784
+Evaluate for model:  resnet101  with knn metric:  cosine
+map@1:  0.875085 map@5:  0.838362 map@10:  0.803891 hit_rate@1:  0.875085 hit_rate@5:  0.956997 hit_rate@10:  0.970648 recall@1:  0.014133 recall@5:  0.066704 recall@10:  0.126178 recall@100:  0.560759 recall@1000:  0.931237 avg_indexing_time:  0.003557 avg_retrieval_time:  0.014368
+Evaluate for model:  resnet152  with knn metric:  euclidean
+map@1:  0.865529 map@5:  0.80901 map@10:  0.773379 hit_rate@1:  0.865529 hit_rate@5:  0.959044 hit_rate@10:  0.972696 recall@1:  0.013978 recall@5:  0.063623 recall@10:  0.119524 recall@100:  0.523001 recall@1000:  0.899989 avg_indexing_time:  0.004256 avg_retrieval_time:  0.00493
+Evaluate for model:  resnet152  with knn metric:  cosine
+map@1:  0.881911 map@5:  0.828259 map@10:  0.797884 hit_rate@1:  0.881911 hit_rate@5:  0.965188 hit_rate@10:  0.975427 recall@1:  0.014181 recall@5:  0.065997 recall@10:  0.124864 recall@100:  0.562479 recall@1000:  0.932087 avg_indexing_time:  0.00429 avg_retrieval_time:  0.014589
+Fitting BOW for n_clusters kmeans:  96
+Fit Kmeans clustering to create BOW
+Fit IDF for TF-IDF Transformation
+Complete Fitting SIFT BOW Extractor
+Evaluate for init k:  100  with d2s:  exp  with weight:  (0.2, 0.8)  (sift vs color)
+map@1:  0.380205 map@5:  0.302116 map@10:  0.267304 hit_rate@1:  0.380205 hit_rate@5:  0.513993 hit_rate@10:  0.586348 recall@1:  0.0 recall@5:  0.0 recall@10:  0.0 recall@100:  0.0 recall@1000:  0.0 avg_indexing_time:  0.008771 avg_retrieval_time:  0.019569
+Evaluate for init k:  100  with d2s:  exp  with weight:  (0.4, 0.6)  (sift vs color)
+map@1:  0.382253 map@5:  0.306348 map@10:  0.269556 hit_rate@1:  0.382253 hit_rate@5:  0.520137 hit_rate@10:  0.589761 recall@1:  0.0 recall@5:  0.0 recall@10:  0.0 recall@100:  0.0 recall@1000:  0.0 avg_indexing_time:  0.008771 avg_retrieval_time:  0.001201
+Evaluate for init k:  100  with d2s:  exp  with weight:  (0.5, 0.5)  (sift vs color)
+map@1:  0.387713 map@5:  0.310307 map@10:  0.272218 hit_rate@1:  0.387713 hit_rate@5:  0.524915 hit_rate@10:  0.596587 recall@1:  0.0 recall@5:  0.0 recall@10:  0.0 recall@100:  0.0 recall@1000:  0.0 avg_indexing_time:  0.008771 avg_retrieval_time:  0.001259
+Evaluate for init k:  100  with d2s:  exp  with weight:  (0.6, 0.4)  (sift vs color)
+map@1:  0.395904 map@5:  0.312901 map@10:  0.275358 hit_rate@1:  0.395904 hit_rate@5:  0.527645 hit_rate@10:  0.602048 recall@1:  0.0 recall@5:  0.0 recall@10:  0.0 recall@100:  0.0 recall@1000:  0.0 avg_indexing_time:  0.008771 avg_retrieval_time:  0.001197
+Evaluate for init k:  100  with d2s:  exp  with weight:  (0.8, 0.2)  (sift vs color)
+map@1:  0.392491 map@5:  0.322457 map@10:  0.283072 hit_rate@1:  0.392491 hit_rate@5:  0.536519 hit_rate@10:  0.611604 recall@1:  0.0 recall@5:  0.0 recall@10:  0.0 recall@100:  0.0 recall@1000:  0.0 avg_indexing_time:  0.008771 avg_retrieval_time:  0.001179
+Evaluate for init k:  100  with d2s:  log  with weight:  (0.2, 0.8)  (sift vs color)
+map@1:  0.380205 map@5:  0.302116 map@10:  0.267304 hit_rate@1:  0.380205 hit_rate@5:  0.513993 hit_rate@10:  0.586348 recall@1:  0.0 recall@5:  0.0 recall@10:  0.0 recall@100:  0.0 recall@1000:  0.0 avg_indexing_time:  0.008771 avg_retrieval_time:  0.019583
+Evaluate for init k:  100  with d2s:  log  with weight:  (0.4, 0.6)  (sift vs color)
+map@1:  0.382253 map@5:  0.306348 map@10:  0.269556 hit_rate@1:  0.382253 hit_rate@5:  0.520137 hit_rate@10:  0.589761 recall@1:  0.0 recall@5:  0.0 recall@10:  0.0 recall@100:  0.0 recall@1000:  0.0 avg_indexing_time:  0.008771 avg_retrieval_time:  0.001294
+Evaluate for init k:  100  with d2s:  log  with weight:  (0.5, 0.5)  (sift vs color)
+map@1:  0.387713 map@5:  0.310307 map@10:  0.272218 hit_rate@1:  0.387713 hit_rate@5:  0.524915 hit_rate@10:  0.596587 recall@1:  0.0 recall@5:  0.0 recall@10:  0.0 recall@100:  0.0 recall@1000:  0.0 avg_indexing_time:  0.008771 avg_retrieval_time:  0.00123
+Evaluate for init k:  100  with d2s:  log  with weight:  (0.6, 0.4)  (sift vs color)
+map@1:  0.395904 map@5:  0.312901 map@10:  0.275358 hit_rate@1:  0.395904 hit_rate@5:  0.527645 hit_rate@10:  0.602048 recall@1:  0.0 recall@5:  0.0 recall@10:  0.0 recall@100:  0.0 recall@1000:  0.0 avg_indexing_time:  0.008771 avg_retrieval_time:  0.001325
+Evaluate for init k:  100  with d2s:  log  with weight:  (0.8, 0.2)  (sift vs color)
+map@1:  0.392491 map@5:  0.322457 map@10:  0.283072 hit_rate@1:  0.392491 hit_rate@5:  0.536519 hit_rate@10:  0.611604 recall@1:  0.0 recall@5:  0.0 recall@10:  0.0 recall@100:  0.0 recall@1000:  0.0 avg_indexing_time:  0.008771 avg_retrieval_time:  0.001253
+Evaluate for init k:  100  with d2s:  logistic  with weight:  (0.2, 0.8)  (sift vs color)
+map@1:  0.380205 map@5:  0.302116 map@10:  0.267304 hit_rate@1:  0.380205 hit_rate@5:  0.513993 hit_rate@10:  0.586348 recall@1:  0.0 recall@5:  0.0 recall@10:  0.0 recall@100:  0.0 recall@1000:  0.0 avg_indexing_time:  0.008771 avg_retrieval_time:  0.019711
+Evaluate for init k:  100  with d2s:  logistic  with weight:  (0.4, 0.6)  (sift vs color)
+map@1:  0.382253 map@5:  0.306348 map@10:  0.269556 hit_rate@1:  0.382253 hit_rate@5:  0.520137 hit_rate@10:  0.589761 recall@1:  0.0 recall@5:  0.0 recall@10:  0.0 recall@100:  0.0 recall@1000:  0.0 avg_indexing_time:  0.008771 avg_retrieval_time:  0.001219
+Evaluate for init k:  100  with d2s:  logistic  with weight:  (0.5, 0.5)  (sift vs color)
+map@1:  0.387713 map@5:  0.310307 map@10:  0.272218 hit_rate@1:  0.387713 hit_rate@5:  0.524915 hit_rate@10:  0.596587 recall@1:  0.0 recall@5:  0.0 recall@10:  0.0 recall@100:  0.0 recall@1000:  0.0 avg_indexing_time:  0.008771 avg_retrieval_time:  0.001312
+Evaluate for init k:  100  with d2s:  logistic  with weight:  (0.6, 0.4)  (sift vs color)
+map@1:  0.395904 map@5:  0.312901 map@10:  0.275358 hit_rate@1:  0.395904 hit_rate@5:  0.527645 hit_rate@10:  0.602048 recall@1:  0.0 recall@5:  0.0 recall@10:  0.0 recall@100:  0.0 recall@1000:  0.0 avg_indexing_time:  0.008771 avg_retrieval_time:  0.001332
+Evaluate for init k:  100  with d2s:  logistic  with weight:  (0.8, 0.2)  (sift vs color)
+map@1:  0.392491 map@5:  0.322457 map@10:  0.283072 hit_rate@1:  0.392491 hit_rate@5:  0.536519 hit_rate@10:  0.611604 recall@1:  0.0 recall@5:  0.0 recall@10:  0.0 recall@100:  0.0 recall@1000:  0.0 avg_indexing_time:  0.008771 avg_retrieval_time:  0.001213
+Evaluate for init k:  100  with d2s:  gaussian  with weight:  (0.2, 0.8)  (sift vs color)
+map@1:  0.380205 map@5:  0.302116 map@10:  0.267304 hit_rate@1:  0.380205 hit_rate@5:  0.513993 hit_rate@10:  0.586348 recall@1:  0.0 recall@5:  0.0 recall@10:  0.0 recall@100:  0.0 recall@1000:  0.0 avg_indexing_time:  0.008771 avg_retrieval_time:  0.019745
+Evaluate for init k:  100  with d2s:  gaussian  with weight:  (0.4, 0.6)  (sift vs color)
+map@1:  0.382253 map@5:  0.306348 map@10:  0.269556 hit_rate@1:  0.382253 hit_rate@5:  0.520137 hit_rate@10:  0.589761 recall@1:  0.0 recall@5:  0.0 recall@10:  0.0 recall@100:  0.0 recall@1000:  0.0 avg_indexing_time:  0.008771 avg_retrieval_time:  0.001193
+Evaluate for init k:  100  with d2s:  gaussian  with weight:  (0.5, 0.5)  (sift vs color)
+map@1:  0.387713 map@5:  0.310307 map@10:  0.272218 hit_rate@1:  0.387713 hit_rate@5:  0.524915 hit_rate@10:  0.596587 recall@1:  0.0 recall@5:  0.0 recall@10:  0.0 recall@100:  0.0 recall@1000:  0.0 avg_indexing_time:  0.008771 avg_retrieval_time:  0.001307
+Evaluate for init k:  100  with d2s:  gaussian  with weight:  (0.6, 0.4)  (sift vs color)
+map@1:  0.395904 map@5:  0.312901 map@10:  0.275358 hit_rate@1:  0.395904 hit_rate@5:  0.527645 hit_rate@10:  0.602048 recall@1:  0.0 recall@5:  0.0 recall@10:  0.0 recall@100:  0.0 recall@1000:  0.0 avg_indexing_time:  0.008771 avg_retrieval_time:  0.001326
+Evaluate for init k:  100  with d2s:  gaussian  with weight:  (0.8, 0.2)  (sift vs color)
+map@1:  0.392491 map@5:  0.322457 map@10:  0.283072 hit_rate@1:  0.392491 hit_rate@5:  0.536519 hit_rate@10:  0.611604 recall@1:  0.0 recall@5:  0.0 recall@10:  0.0 recall@100:  0.0 recall@1000:  0.0 avg_indexing_time:  0.008771 avg_retrieval_time:  0.00135
+Evaluate for init k:  100  with d2s:  inverse  with weight:  (0.2, 0.8)  (sift vs color)
+map@1:  0.380205 map@5:  0.302116 map@10:  0.267304 hit_rate@1:  0.380205 hit_rate@5:  0.513993 hit_rate@10:  0.586348 recall@1:  0.0 recall@5:  0.0 recall@10:  0.0 recall@100:  0.0 recall@1000:  0.0 avg_indexing_time:  0.008771 avg_retrieval_time:  0.019797
+Evaluate for init k:  100  with d2s:  inverse  with weight:  (0.4, 0.6)  (sift vs color)
+map@1:  0.382253 map@5:  0.306348 map@10:  0.269556 hit_rate@1:  0.382253 hit_rate@5:  0.520137 hit_rate@10:  0.589761 recall@1:  0.0 recall@5:  0.0 recall@10:  0.0 recall@100:  0.0 recall@1000:  0.0 avg_indexing_time:  0.008771 avg_retrieval_time:  0.001224
+Evaluate for init k:  100  with d2s:  inverse  with weight:  (0.5, 0.5)  (sift vs color)
+map@1:  0.387713 map@5:  0.310307 map@10:  0.272218 hit_rate@1:  0.387713 hit_rate@5:  0.524915 hit_rate@10:  0.596587 recall@1:  0.0 recall@5:  0.0 recall@10:  0.0 recall@100:  0.0 recall@1000:  0.0 avg_indexing_time:  0.008771 avg_retrieval_time:  0.001354
+Evaluate for init k:  100  with d2s:  inverse  with weight:  (0.6, 0.4)  (sift vs color)
+map@1:  0.395904 map@5:  0.312901 map@10:  0.275358 hit_rate@1:  0.395904 hit_rate@5:  0.527645 hit_rate@10:  0.602048 recall@1:  0.0 recall@5:  0.0 recall@10:  0.0 recall@100:  0.0 recall@1000:  0.0 avg_indexing_time:  0.008771 avg_retrieval_time:  0.001285
+Evaluate for init k:  100  with d2s:  inverse  with weight:  (0.8, 0.2)  (sift vs color)
+map@1:  0.392491 map@5:  0.322457 map@10:  0.283072 hit_rate@1:  0.392491 hit_rate@5:  0.536519 hit_rate@10:  0.611604 recall@1:  0.0 recall@5:  0.0 recall@10:  0.0 recall@100:  0.0 recall@1000:  0.0 avg_indexing_time:  0.008771 avg_retrieval_time:  0.001363
+Evaluate for init k:  1000  with d2s:  exp  with weight:  (0.2, 0.8)  (sift vs color)
+map@1:  0.380887 map@5:  0.303345 map@10:  0.268259 hit_rate@1:  0.380887 hit_rate@5:  0.517406 hit_rate@10:  0.586348 recall@1:  0.0 recall@5:  0.0 recall@10:  0.0 recall@100:  0.0 recall@1000:  0.0 avg_indexing_time:  0.008771 avg_retrieval_time:  0.02034
+Evaluate for init k:  1000  with d2s:  exp  with weight:  (0.4, 0.6)  (sift vs color)
+map@1:  0.3843 map@5:  0.308805 map@10:  0.272287 hit_rate@1:  0.3843 hit_rate@5:  0.523549 hit_rate@10:  0.593857 recall@1:  0.0 recall@5:  0.0 recall@10:  0.0 recall@100:  0.0 recall@1000:  0.0 avg_indexing_time:  0.008771 avg_retrieval_time:  0.001552
+Evaluate for init k:  1000  with d2s:  exp  with weight:  (0.5, 0.5)  (sift vs color)
+map@1:  0.389761 map@5:  0.312491 map@10:  0.276451 hit_rate@1:  0.389761 hit_rate@5:  0.524915 hit_rate@10:  0.598635 recall@1:  0.0 recall@5:  0.0 recall@10:  0.0 recall@100:  0.0 recall@1000:  0.0 avg_indexing_time:  0.008771 avg_retrieval_time:  0.001538
+Evaluate for init k:  1000  with d2s:  exp  with weight:  (0.6, 0.4)  (sift vs color)
+map@1:  0.395222 map@5:  0.316724 map@10:  0.281365 hit_rate@1:  0.395222 hit_rate@5:  0.531741 hit_rate@10:  0.604096 recall@1:  0.0 recall@5:  0.0 recall@10:  0.0 recall@100:  0.0 recall@1000:  0.0 avg_indexing_time:  0.008771 avg_retrieval_time:  0.001529
+Evaluate for init k:  1000  with d2s:  exp  with weight:  (0.8, 0.2)  (sift vs color)
+map@1:  0.402048 map@5:  0.328055 map@10:  0.296246 hit_rate@1:  0.402048 hit_rate@5:  0.539932 hit_rate@10:  0.61843 recall@1:  0.0 recall@5:  0.0 recall@10:  0.0 recall@100:  0.0 recall@1000:  0.0 avg_indexing_time:  0.008771 avg_retrieval_time:  0.001522
+Evaluate for init k:  1000  with d2s:  log  with weight:  (0.2, 0.8)  (sift vs color)
+map@1:  0.380887 map@5:  0.303345 map@10:  0.268259 hit_rate@1:  0.380887 hit_rate@5:  0.517406 hit_rate@10:  0.586348 recall@1:  0.0 recall@5:  0.0 recall@10:  0.0 recall@100:  0.0 recall@1000:  0.0 avg_indexing_time:  0.008771 avg_retrieval_time:  0.020417
+Evaluate for init k:  1000  with d2s:  log  with weight:  (0.4, 0.6)  (sift vs color)
+map@1:  0.3843 map@5:  0.308805 map@10:  0.272287 hit_rate@1:  0.3843 hit_rate@5:  0.523549 hit_rate@10:  0.593857 recall@1:  0.0 recall@5:  0.0 recall@10:  0.0 recall@100:  0.0 recall@1000:  0.0 avg_indexing_time:  0.008771 avg_retrieval_time:  0.001539
+Evaluate for init k:  1000  with d2s:  log  with weight:  (0.5, 0.5)  (sift vs color)
+map@1:  0.389761 map@5:  0.312491 map@10:  0.276451 hit_rate@1:  0.389761 hit_rate@5:  0.524915 hit_rate@10:  0.598635 recall@1:  0.0 recall@5:  0.0 recall@10:  0.0 recall@100:  0.0 recall@1000:  0.0 avg_indexing_time:  0.008771 avg_retrieval_time:  0.001527
+Evaluate for init k:  1000  with d2s:  log  with weight:  (0.6, 0.4)  (sift vs color)
+map@1:  0.395222 map@5:  0.316724 map@10:  0.281365 hit_rate@1:  0.395222 hit_rate@5:  0.531741 hit_rate@10:  0.604096 recall@1:  0.0 recall@5:  0.0 recall@10:  0.0 recall@100:  0.0 recall@1000:  0.0 avg_indexing_time:  0.008771 avg_retrieval_time:  0.001522
+Evaluate for init k:  1000  with d2s:  log  with weight:  (0.8, 0.2)  (sift vs color)
+map@1:  0.402048 map@5:  0.328055 map@10:  0.296246 hit_rate@1:  0.402048 hit_rate@5:  0.539932 hit_rate@10:  0.61843 recall@1:  0.0 recall@5:  0.0 recall@10:  0.0 recall@100:  0.0 recall@1000:  0.0 avg_indexing_time:  0.008771 avg_retrieval_time:  0.001513
+Evaluate for init k:  1000  with d2s:  logistic  with weight:  (0.2, 0.8)  (sift vs color)
+map@1:  0.380887 map@5:  0.303345 map@10:  0.268259 hit_rate@1:  0.380887 hit_rate@5:  0.517406 hit_rate@10:  0.586348 recall@1:  0.0 recall@5:  0.0 recall@10:  0.0 recall@100:  0.0 recall@1000:  0.0 avg_indexing_time:  0.008771 avg_retrieval_time:  0.020387
+Evaluate for init k:  1000  with d2s:  logistic  with weight:  (0.4, 0.6)  (sift vs color)
+map@1:  0.3843 map@5:  0.308805 map@10:  0.272287 hit_rate@1:  0.3843 hit_rate@5:  0.523549 hit_rate@10:  0.593857 recall@1:  0.0 recall@5:  0.0 recall@10:  0.0 recall@100:  0.0 recall@1000:  0.0 avg_indexing_time:  0.008771 avg_retrieval_time:  0.001394
+Evaluate for init k:  1000  with d2s:  logistic  with weight:  (0.5, 0.5)  (sift vs color)
+map@1:  0.389761 map@5:  0.312491 map@10:  0.276451 hit_rate@1:  0.389761 hit_rate@5:  0.524915 hit_rate@10:  0.598635 recall@1:  0.0 recall@5:  0.0 recall@10:  0.0 recall@100:  0.0 recall@1000:  0.0 avg_indexing_time:  0.008771 avg_retrieval_time:  0.00157
+Evaluate for init k:  1000  with d2s:  logistic  with weight:  (0.6, 0.4)  (sift vs color)
+map@1:  0.395222 map@5:  0.316724 map@10:  0.281365 hit_rate@1:  0.395222 hit_rate@5:  0.531741 hit_rate@10:  0.604096 recall@1:  0.0 recall@5:  0.0 recall@10:  0.0 recall@100:  0.0 recall@1000:  0.0 avg_indexing_time:  0.008771 avg_retrieval_time:  0.001587
+Evaluate for init k:  1000  with d2s:  logistic  with weight:  (0.8, 0.2)  (sift vs color)
+map@1:  0.402048 map@5:  0.328055 map@10:  0.296246 hit_rate@1:  0.402048 hit_rate@5:  0.539932 hit_rate@10:  0.61843 recall@1:  0.0 recall@5:  0.0 recall@10:  0.0 recall@100:  0.0 recall@1000:  0.0 avg_indexing_time:  0.008771 avg_retrieval_time:  0.001605
+Evaluate for init k:  1000  with d2s:  gaussian  with weight:  (0.2, 0.8)  (sift vs color)
+map@1:  0.380887 map@5:  0.303345 map@10:  0.268259 hit_rate@1:  0.380887 hit_rate@5:  0.517406 hit_rate@10:  0.586348 recall@1:  0.0 recall@5:  0.0 recall@10:  0.0 recall@100:  0.0 recall@1000:  0.0 avg_indexing_time:  0.008771 avg_retrieval_time:  0.020298
+Evaluate for init k:  1000  with d2s:  gaussian  with weight:  (0.4, 0.6)  (sift vs color)
+map@1:  0.3843 map@5:  0.308805 map@10:  0.272287 hit_rate@1:  0.3843 hit_rate@5:  0.523549 hit_rate@10:  0.593857 recall@1:  0.0 recall@5:  0.0 recall@10:  0.0 recall@100:  0.0 recall@1000:  0.0 avg_indexing_time:  0.008771 avg_retrieval_time:  0.00169
+Evaluate for init k:  1000  with d2s:  gaussian  with weight:  (0.5, 0.5)  (sift vs color)
+map@1:  0.389761 map@5:  0.312491 map@10:  0.276451 hit_rate@1:  0.389761 hit_rate@5:  0.524915 hit_rate@10:  0.598635 recall@1:  0.0 recall@5:  0.0 recall@10:  0.0 recall@100:  0.0 recall@1000:  0.0 avg_indexing_time:  0.008771 avg_retrieval_time:  0.001463
+Evaluate for init k:  1000  with d2s:  gaussian  with weight:  (0.6, 0.4)  (sift vs color)
+map@1:  0.395222 map@5:  0.316724 map@10:  0.281365 hit_rate@1:  0.395222 hit_rate@5:  0.531741 hit_rate@10:  0.604096 recall@1:  0.0 recall@5:  0.0 recall@10:  0.0 recall@100:  0.0 recall@1000:  0.0 avg_indexing_time:  0.008771 avg_retrieval_time:  0.001432
+Evaluate for init k:  1000  with d2s:  gaussian  with weight:  (0.8, 0.2)  (sift vs color)
+map@1:  0.402048 map@5:  0.328055 map@10:  0.296246 hit_rate@1:  0.402048 hit_rate@5:  0.539932 hit_rate@10:  0.61843 recall@1:  0.0 recall@5:  0.0 recall@10:  0.0 recall@100:  0.0 recall@1000:  0.0 avg_indexing_time:  0.008771 avg_retrieval_time:  0.001657
+Evaluate for init k:  1000  with d2s:  inverse  with weight:  (0.2, 0.8)  (sift vs color)
+map@1:  0.380887 map@5:  0.303345 map@10:  0.268259 hit_rate@1:  0.380887 hit_rate@5:  0.517406 hit_rate@10:  0.586348 recall@1:  0.0 recall@5:  0.0 recall@10:  0.0 recall@100:  0.0 recall@1000:  0.0 avg_indexing_time:  0.008771 avg_retrieval_time:  0.020334
+Evaluate for init k:  1000  with d2s:  inverse  with weight:  (0.4, 0.6)  (sift vs color)
+map@1:  0.3843 map@5:  0.308805 map@10:  0.272287 hit_rate@1:  0.3843 hit_rate@5:  0.523549 hit_rate@10:  0.593857 recall@1:  0.0 recall@5:  0.0 recall@10:  0.0 recall@100:  0.0 recall@1000:  0.0 avg_indexing_time:  0.008771 avg_retrieval_time:  0.001483
+Evaluate for init k:  1000  with d2s:  inverse  with weight:  (0.5, 0.5)  (sift vs color)
+map@1:  0.389761 map@5:  0.312491 map@10:  0.276451 hit_rate@1:  0.389761 hit_rate@5:  0.524915 hit_rate@10:  0.598635 recall@1:  0.0 recall@5:  0.0 recall@10:  0.0 recall@100:  0.0 recall@1000:  0.0 avg_indexing_time:  0.008771 avg_retrieval_time:  0.001779
+Evaluate for init k:  1000  with d2s:  inverse  with weight:  (0.6, 0.4)  (sift vs color)
+map@1:  0.395222 map@5:  0.316724 map@10:  0.281365 hit_rate@1:  0.395222 hit_rate@5:  0.531741 hit_rate@10:  0.604096 recall@1:  0.0 recall@5:  0.0 recall@10:  0.0 recall@100:  0.0 recall@1000:  0.0 avg_indexing_time:  0.008771 avg_retrieval_time:  0.001509
+Evaluate for init k:  1000  with d2s:  inverse  with weight:  (0.8, 0.2)  (sift vs color)
+map@1:  0.402048 map@5:  0.328055 map@10:  0.296246 hit_rate@1:  0.402048 hit_rate@5:  0.539932 hit_rate@10:  0.61843 recall@1:  0.0 recall@5:  0.0 recall@10:  0.0 recall@100:  0.0 recall@1000:  0.0 avg_indexing_time:  0.008771 avg_retrieval_time:  0.00148
+Evaluate for init k:  6353  with d2s:  exp  with weight:  (0.2, 0.8)  (sift vs color)
+map@1:  0.380887 map@5:  0.302662 map@10:  0.267986 hit_rate@1:  0.380887 hit_rate@5:  0.516724 hit_rate@10:  0.585666 recall@1:  0.0 recall@5:  0.0 recall@10:  0.0 recall@100:  0.0 recall@1000:  0.0 avg_indexing_time:  0.008771 avg_retrieval_time:  0.023527
+Evaluate for init k:  6353  with d2s:  exp  with weight:  (0.4, 0.6)  (sift vs color)
+map@1:  0.382253 map@5:  0.308396 map@10:  0.271536 hit_rate@1:  0.382253 hit_rate@5:  0.523549 hit_rate@10:  0.593174 recall@1:  0.0 recall@5:  0.0 recall@10:  0.0 recall@100:  0.0 recall@1000:  0.0 avg_indexing_time:  0.008771 avg_retrieval_time:  0.003392
+Evaluate for init k:  6353  with d2s:  exp  with weight:  (0.5, 0.5)  (sift vs color)
+map@1:  0.387713 map@5:  0.311945 map@10:  0.274812 hit_rate@1:  0.387713 hit_rate@5:  0.52628 hit_rate@10:  0.59727 recall@1:  0.0 recall@5:  0.0 recall@10:  0.0 recall@100:  0.0 recall@1000:  0.0 avg_indexing_time:  0.008771 avg_retrieval_time:  0.002839
+Evaluate for init k:  6353  with d2s:  exp  with weight:  (0.6, 0.4)  (sift vs color)
+map@1:  0.394539 map@5:  0.316177 map@10:  0.280341 hit_rate@1:  0.394539 hit_rate@5:  0.532423 hit_rate@10:  0.60273 recall@1:  0.0 recall@5:  0.0 recall@10:  0.0 recall@100:  0.0 recall@1000:  0.0 avg_indexing_time:  0.008771 avg_retrieval_time:  0.003343
+Evaluate for init k:  6353  with d2s:  exp  with weight:  (0.8, 0.2)  (sift vs color)
+map@1:  0.402048 map@5:  0.325461 map@10:  0.295017 hit_rate@1:  0.402048 hit_rate@5:  0.535836 hit_rate@10:  0.617747 recall@1:  0.0 recall@5:  0.0 recall@10:  0.0 recall@100:  0.0 recall@1000:  0.0 avg_indexing_time:  0.008771 avg_retrieval_time:  0.003434
+Evaluate for init k:  6353  with d2s:  log  with weight:  (0.2, 0.8)  (sift vs color)
+map@1:  0.380887 map@5:  0.302662 map@10:  0.267986 hit_rate@1:  0.380887 hit_rate@5:  0.516724 hit_rate@10:  0.585666 recall@1:  0.0 recall@5:  0.0 recall@10:  0.0 recall@100:  0.0 recall@1000:  0.0 avg_indexing_time:  0.008771 avg_retrieval_time:  0.023525
+Evaluate for init k:  6353  with d2s:  log  with weight:  (0.4, 0.6)  (sift vs color)
+map@1:  0.382253 map@5:  0.308396 map@10:  0.271536 hit_rate@1:  0.382253 hit_rate@5:  0.523549 hit_rate@10:  0.593174 recall@1:  0.0 recall@5:  0.0 recall@10:  0.0 recall@100:  0.0 recall@1000:  0.0 avg_indexing_time:  0.008771 avg_retrieval_time:  0.004414
+Evaluate for init k:  6353  with d2s:  log  with weight:  (0.5, 0.5)  (sift vs color)
+map@1:  0.387713 map@5:  0.311945 map@10:  0.274812 hit_rate@1:  0.387713 hit_rate@5:  0.52628 hit_rate@10:  0.59727 recall@1:  0.0 recall@5:  0.0 recall@10:  0.0 recall@100:  0.0 recall@1000:  0.0 avg_indexing_time:  0.008771 avg_retrieval_time:  0.003072
+Evaluate for init k:  6353  with d2s:  log  with weight:  (0.6, 0.4)  (sift vs color)
+map@1:  0.394539 map@5:  0.316177 map@10:  0.280341 hit_rate@1:  0.394539 hit_rate@5:  0.532423 hit_rate@10:  0.60273 recall@1:  0.0 recall@5:  0.0 recall@10:  0.0 recall@100:  0.0 recall@1000:  0.0 avg_indexing_time:  0.008771 avg_retrieval_time:  0.002821
+Evaluate for init k:  6353  with d2s:  log  with weight:  (0.8, 0.2)  (sift vs color)
+map@1:  0.402048 map@5:  0.325461 map@10:  0.295017 hit_rate@1:  0.402048 hit_rate@5:  0.535836 hit_rate@10:  0.617747 recall@1:  0.0 recall@5:  0.0 recall@10:  0.0 recall@100:  0.0 recall@1000:  0.0 avg_indexing_time:  0.008771 avg_retrieval_time:  0.003754
+Evaluate for init k:  6353  with d2s:  logistic  with weight:  (0.2, 0.8)  (sift vs color)
+map@1:  0.380887 map@5:  0.302662 map@10:  0.267986 hit_rate@1:  0.380887 hit_rate@5:  0.516724 hit_rate@10:  0.585666 recall@1:  0.0 recall@5:  0.0 recall@10:  0.0 recall@100:  0.0 recall@1000:  0.0 avg_indexing_time:  0.008771 avg_retrieval_time:  0.023343
+Evaluate for init k:  6353  with d2s:  logistic  with weight:  (0.4, 0.6)  (sift vs color)
+map@1:  0.382253 map@5:  0.308396 map@10:  0.271536 hit_rate@1:  0.382253 hit_rate@5:  0.523549 hit_rate@10:  0.593174 recall@1:  0.0 recall@5:  0.0 recall@10:  0.0 recall@100:  0.0 recall@1000:  0.0 avg_indexing_time:  0.008771 avg_retrieval_time:  0.00468
+Evaluate for init k:  6353  with d2s:  logistic  with weight:  (0.5, 0.5)  (sift vs color)
+map@1:  0.387713 map@5:  0.311945 map@10:  0.274812 hit_rate@1:  0.387713 hit_rate@5:  0.52628 hit_rate@10:  0.59727 recall@1:  0.0 recall@5:  0.0 recall@10:  0.0 recall@100:  0.0 recall@1000:  0.0 avg_indexing_time:  0.008771 avg_retrieval_time:  0.002964
+Evaluate for init k:  6353  with d2s:  logistic  with weight:  (0.6, 0.4)  (sift vs color)
+map@1:  0.394539 map@5:  0.316177 map@10:  0.280341 hit_rate@1:  0.394539 hit_rate@5:  0.532423 hit_rate@10:  0.60273 recall@1:  0.0 recall@5:  0.0 recall@10:  0.0 recall@100:  0.0 recall@1000:  0.0 avg_indexing_time:  0.008771 avg_retrieval_time:  0.002862
+Evaluate for init k:  6353  with d2s:  logistic  with weight:  (0.8, 0.2)  (sift vs color)
+map@1:  0.402048 map@5:  0.325461 map@10:  0.295017 hit_rate@1:  0.402048 hit_rate@5:  0.535836 hit_rate@10:  0.617747 recall@1:  0.0 recall@5:  0.0 recall@10:  0.0 recall@100:  0.0 recall@1000:  0.0 avg_indexing_time:  0.008771 avg_retrieval_time:  0.004115
+Evaluate for init k:  6353  with d2s:  gaussian  with weight:  (0.2, 0.8)  (sift vs color)
+map@1:  0.380887 map@5:  0.302662 map@10:  0.267986 hit_rate@1:  0.380887 hit_rate@5:  0.516724 hit_rate@10:  0.585666 recall@1:  0.0 recall@5:  0.0 recall@10:  0.0 recall@100:  0.0 recall@1000:  0.0 avg_indexing_time:  0.008771 avg_retrieval_time:  0.023535
+Evaluate for init k:  6353  with d2s:  gaussian  with weight:  (0.4, 0.6)  (sift vs color)
+map@1:  0.382253 map@5:  0.308396 map@10:  0.271536 hit_rate@1:  0.382253 hit_rate@5:  0.523549 hit_rate@10:  0.593174 recall@1:  0.0 recall@5:  0.0 recall@10:  0.0 recall@100:  0.0 recall@1000:  0.0 avg_indexing_time:  0.008771 avg_retrieval_time:  0.002947
+Evaluate for init k:  6353  with d2s:  gaussian  with weight:  (0.5, 0.5)  (sift vs color)
+map@1:  0.387713 map@5:  0.311945 map@10:  0.274812 hit_rate@1:  0.387713 hit_rate@5:  0.52628 hit_rate@10:  0.59727 recall@1:  0.0 recall@5:  0.0 recall@10:  0.0 recall@100:  0.0 recall@1000:  0.0 avg_indexing_time:  0.008771 avg_retrieval_time:  0.002871
+Evaluate for init k:  6353  with d2s:  gaussian  with weight:  (0.6, 0.4)  (sift vs color)
+map@1:  0.394539 map@5:  0.316177 map@10:  0.280341 hit_rate@1:  0.394539 hit_rate@5:  0.532423 hit_rate@10:  0.60273 recall@1:  0.0 recall@5:  0.0 recall@10:  0.0 recall@100:  0.0 recall@1000:  0.0 avg_indexing_time:  0.008771 avg_retrieval_time:  0.004603
+Evaluate for init k:  6353  with d2s:  gaussian  with weight:  (0.8, 0.2)  (sift vs color)
+map@1:  0.402048 map@5:  0.325461 map@10:  0.295017 hit_rate@1:  0.402048 hit_rate@5:  0.535836 hit_rate@10:  0.617747 recall@1:  0.0 recall@5:  0.0 recall@10:  0.0 recall@100:  0.0 recall@1000:  0.0 avg_indexing_time:  0.008771 avg_retrieval_time:  0.002983
+Evaluate for init k:  6353  with d2s:  inverse  with weight:  (0.2, 0.8)  (sift vs color)
+map@1:  0.380887 map@5:  0.302662 map@10:  0.267986 hit_rate@1:  0.380887 hit_rate@5:  0.516724 hit_rate@10:  0.585666 recall@1:  0.0 recall@5:  0.0 recall@10:  0.0 recall@100:  0.0 recall@1000:  0.0 avg_indexing_time:  0.008771 avg_retrieval_time:  0.023903
+Evaluate for init k:  6353  with d2s:  inverse  with weight:  (0.4, 0.6)  (sift vs color)
+map@1:  0.382253 map@5:  0.308396 map@10:  0.271536 hit_rate@1:  0.382253 hit_rate@5:  0.523549 hit_rate@10:  0.593174 recall@1:  0.0 recall@5:  0.0 recall@10:  0.0 recall@100:  0.0 recall@1000:  0.0 avg_indexing_time:  0.008771 avg_retrieval_time:  0.003559
+Evaluate for init k:  6353  with d2s:  inverse  with weight:  (0.5, 0.5)  (sift vs color)
+map@1:  0.387713 map@5:  0.311945 map@10:  0.274812 hit_rate@1:  0.387713 hit_rate@5:  0.52628 hit_rate@10:  0.59727 recall@1:  0.0 recall@5:  0.0 recall@10:  0.0 recall@100:  0.0 recall@1000:  0.0 avg_indexing_time:  0.008771 avg_retrieval_time:  0.002912
+Evaluate for init k:  6353  with d2s:  inverse  with weight:  (0.6, 0.4)  (sift vs color)
+map@1:  0.394539 map@5:  0.316177 map@10:  0.280341 hit_rate@1:  0.394539 hit_rate@5:  0.532423 hit_rate@10:  0.60273 recall@1:  0.0 recall@5:  0.0 recall@10:  0.0 recall@100:  0.0 recall@1000:  0.0 avg_indexing_time:  0.008771 avg_retrieval_time:  0.004916
+Evaluate for init k:  6353  with d2s:  inverse  with weight:  (0.8, 0.2)  (sift vs color)
+map@1:  0.402048 map@5:  0.325461 map@10:  0.295017 hit_rate@1:  0.402048 hit_rate@5:  0.535836 hit_rate@10:  0.617747 recall@1:  0.0 recall@5:  0.0 recall@10:  0.0 recall@100:  0.0 recall@1000:  0.0 avg_indexing_time:  0.008771 avg_retrieval_time:  0.003062
+Fitting BOW for n_clusters kmeans:  96
+Fit Kmeans clustering to create BOW
+Fit IDF for TF-IDF Transformation
+Complete Fitting SIFT BOW Extractor
+Evaluate for init k:  6353  with d2s:  exp  with weight:  (0.16, 0.04, 0.8)  (sift vs color vs resnet)
+map@1:  0.879863 map@5:  0.827304 map@10:  0.795017 hit_rate@1:  0.879863 hit_rate@5:  0.965188 hit_rate@10:  0.974061 recall@1:  0.0 recall@5:  0.0 recall@10:  0.0 recall@100:  0.0 recall@1000:  0.0 avg_indexing_time:  0.012997 avg_retrieval_time:  0.043442
+Evaluate for init k:  6353  with d2s:  exp  with weight:  (0.32, 0.08, 0.6)  (sift vs color vs resnet)
+map@1:  0.869625 map@5:  0.814334 map@10:  0.780819 hit_rate@1:  0.869625 hit_rate@5:  0.956997 hit_rate@10:  0.973379 recall@1:  0.0 recall@5:  0.0 recall@10:  0.0 recall@100:  0.0 recall@1000:  0.0 avg_indexing_time:  0.012997 avg_retrieval_time:  0.003675
+Evaluate for init k:  6353  with d2s:  exp  with weight:  (0.4, 0.1, 0.5)  (sift vs color vs resnet)
+map@1:  0.85802 map@5:  0.803413 map@10:  0.764642 hit_rate@1:  0.85802 hit_rate@5:  0.952901 hit_rate@10:  0.969283 recall@1:  0.0 recall@5:  0.0 recall@10:  0.0 recall@100:  0.0 recall@1000:  0.0 avg_indexing_time:  0.012997 avg_retrieval_time:  0.004133
+Evaluate for init k:  6353  with d2s:  exp  with weight:  (0.48, 0.12, 0.4)  (sift vs color vs resnet)
+map@1:  0.838225 map@5:  0.778703 map@10:  0.736997 hit_rate@1:  0.838225 hit_rate@5:  0.944027 hit_rate@10:  0.965188 recall@1:  0.0 recall@5:  0.0 recall@10:  0.0 recall@100:  0.0 recall@1000:  0.0 avg_indexing_time:  0.012997 avg_retrieval_time:  0.004157
+Evaluate for init k:  6353  with d2s:  exp  with weight:  (0.64, 0.16, 0.2)  (sift vs color vs resnet)
+map@1:  0.745392 map@5:  0.672765 map@10:  0.62157 hit_rate@1:  0.745392 hit_rate@5:  0.884642 hit_rate@10:  0.924232 recall@1:  0.0 recall@5:  0.0 recall@10:  0.0 recall@100:  0.0 recall@1000:  0.0 avg_indexing_time:  0.012997 avg_retrieval_time:  0.003683

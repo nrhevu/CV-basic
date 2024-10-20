@@ -196,7 +196,7 @@ for k, d2s, weight in grid(ks, d2ss, weights):
     avg_recall1 = round(np.mean(recall1), 6)
     map5 = round(np.mean(ap5), 6)
     avg_hit5 = round(np.mean(hit5), 6)
-    avg_recall15 = round(np.mean(recall5), 6)
+    avg_recall5 = round(np.mean(recall5), 6)
     map10 = round(np.mean(ap10), 6)
     avg_hit10 = round(np.mean(hit10), 6)
     avg_recall10 = round(np.mean(recall10), 6)
@@ -216,7 +216,7 @@ for k, d2s, weight in grid(ks, d2ss, weights):
             "hit_rate@5": [avg_hit5],
             "hit_rate@10": [avg_hit10],
             "recall@1": [avg_recall1],
-            "recall@5": [avg_recall15],
+            "recall@5": [avg_recall5],
             "recall@10": [avg_recall10],
             "recall@100": [avg_recall100],
             "recall@1000": [avg_recall1000],
@@ -233,7 +233,7 @@ for k, d2s, weight in grid(ks, d2ss, weights):
         "hit_rate@5: ", avg_hit5,
         "hit_rate@10: ", avg_hit10,
         "recall@1: ", avg_recall1,
-        "recall@5: ", avg_recall15,
+        "recall@5: ", avg_recall5,
         "recall@10: ", avg_recall10,
         "recall@100: ", avg_recall100,
         "recall@1000: ", avg_recall1000,
