@@ -61,6 +61,7 @@ eval = pd.DataFrame(
     columns=[
         "bins",
         "htype",
+        "slice",
         "metric",
         "map@1",
         "map@5",
@@ -80,12 +81,13 @@ eval = pd.DataFrame(
 
 n_bins = [2, 4, 8, 12]
 h_types = ["region", "global"]
+n_slices = [2, 3, 4, 5]
 knn_metrics = ["euclidean", "cosine"]
-for bins, h_type, metric in grid(n_bins, h_types, knn_metrics):
-    print("Evaluate for bins: ", bins, " h_type: ", h_type, "", " with knn metric: ", metric)
+for bins, h_type, n_slice, metric in grid(n_bins, h_types, n_slices, knn_metrics):
+    print("Evaluate for bins: ", bins, " h_type: ", h_type, " n_slice: ", n_slice, " with knn metric: ", metric)
 
     # Initialization
-    rgb_histogram = RGBHistogram(n_bin=bins, h_type=h_type)
+    rgb_histogram = RGBHistogram(n_bin=bins, n_slice=n_slice, h_type=h_type)
     array_store = NPArrayStore(retrieve=KNNRetrieval(metric=metric))
     cbir = CBIR(rgb_histogram, array_store)
 
@@ -152,6 +154,7 @@ for bins, h_type, metric in grid(n_bins, h_types, knn_metrics):
         {
             "bins": [bins],
             "htype": [h_type],
+            "slice": [n_slice],
             "metric": [metric],
             "map@1": [map1],
             "map@5": [map5],

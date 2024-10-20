@@ -12,7 +12,6 @@ from PIL import Image
 
 from cbir import *
 from cbir.pipeline import *
-from cbir.utils.ensemble import ensemble_search
 from cbir.utils.grid import grid
 
 # Ignore all warnings
@@ -57,11 +56,11 @@ testloader = torch.utils.data.DataLoader(
     testset, batch_size=128, shuffle=False, num_workers=2
 )
 
+# BEGIN EVALUATION
 eval = pd.DataFrame(
     columns=[
-        "k",
-        "distance2score",
-        "weight(sift vs color vs resnet)",
+        "model",
+        "metric",
         "map@1",
         "map@5",
         "map@10",
@@ -78,86 +77,30 @@ eval = pd.DataFrame(
     ]
 )
 
-# BEGIN EVALUATION
-siftbow = SIFTBOWExtractor(mode="tfidf")
-sift_array_store = NPArrayStore(retrieve=KNNRetrieval(metric="manhattan"))
+models = ["resnet18", "resnet34", "resnet50", "resnet101", "resnet152"]
+knn_metrics = ["euclidean", "cosine"]
+for model, metric in grid(models, knn_metrics):
+    print("Evaluate for model: ", model, " with knn metric: ", metric)
 
-rgb_histogram = RGBHistogram(n_bin=4, h_type="region", n_slice=5)
-color_array_store = NPArrayStore(retrieve=KNNRetrieval(metric="cosine"))
+    # Initialization
+    resnet = ResNetExtractor(model=model, device="cpu")
+    array_store = NPArrayStore(retrieve=KNNRetrieval(metric=metric))
+    cbir = CBIR(resnet, array_store)
 
-resnet = ResNetExtractor(model="resnet101", device="cuda")
-resnet_array_store = NPArrayStore(retrieve=KNNRetrieval(metric="cosine"))
-# Fitting siftbow with train data
-print("Fitting BOW for n_clusters kmeans: ", 96)
-train_img = []
-for images, labels in tqdm(valloader):
-    images = (images.numpy().transpose(0,2,3,1) * 255).astype(np.uint8)
-    train_img.append(images)
+    # Indexing
+    start = time()
+    for images, labels in tqdm(dataloader, desc="Indexing"):
+        images = images.numpy()
+        cbir.indexing(images)
+    avg_indexing_time = round((time() - start) / len(dataset), 6)
 
-train_img = np.concatenate(train_img)
-siftbow.fit(train_img, k=96)
-
-cbir_sift = CBIR(siftbow, sift_array_store)
-cbir_color = CBIR(rgb_histogram, color_array_store)
-cbir_resnet = CBIR(resnet, resnet_array_store)
-
-# Indexing
-start = time()
-for images, labels in tqdm(dataloader, desc="Indexing"):
-    cbir_resnet.indexing(images.numpy())
-    images = (images.numpy().transpose(0,2,3,1) * 255).astype(np.uint8)
-    cbir_sift.indexing(images)
-    cbir_color.indexing(images)
-avg_indexing_time = round((time() - start) / len(dataset), 6)
-
-ks = [len(dataset)] # Top K each algorithm
-d2ss = ["exp"] # Distance to Score Function
-weights = [
-    (round(0.8 * 0.2, 2), round(0.2 * 0.2, 2), 0.8),
-    (round(0.8 * 0.4, 2), round(0.2 * 0.4, 2), 0.6),
-    (round(0.8 * 0.5, 2), round(0.2 * 0.5, 2), 0.5),
-    (round(0.8 * 0.6, 2), round(0.2 * 0.6, 2), 0.4),
-    (round(0.8 * 0.8, 2), round(0.2 * 0.8, 2), 0.2),
-]  # Weights for each algorithm
-cache = {"sift":{},
-         "color": {},
-         "resnet": {}}
-for k, d2s, weight in grid(ks, d2ss, weights):
-    print("Evaluate for init k: ", k, " with d2s: ", d2s, " with weight: ", weight, " (sift vs color vs resnet)")
     # Retrieval
     start = time()
     rs = []
     ground_truth = []
-    image_count = 0
     for images, labels in tqdm(testloader, desc="Retrieval"):
-        images = (images.numpy().transpose(0, 2, 3, 1) * 255).astype(np.uint8)
-        for image in images:
-            try:
-                cbir_sift_result = cache["sift"][f"{image_count}-{k}-{d2s}"]
-                cbir_color_result = cache["color"][f"{image_count}-{k}-{d2s}"]
-                cbir_resnet_result = cache["resnet"][f"{image_count}-{k}-{d2s}"]
-            except KeyError:
-                cbir_sift_result = cbir_sift.retrieve(image, k=k, distance_transform=d2s)
-                cache["sift"][f"{image_count}-{k}-{d2s}"] = cbir_sift_result
-                cbir_color_result = cbir_color.retrieve(image, k=k, distance_transform=d2s)
-                cache["color"][f"{image_count}-{k}-{d2s}"] = cbir_color_result
-                cbir_resnet_result = cbir_resnet.retrieve(
-                    np.expand_dims(image.transpose(2, 0, 1), 0) / 255,
-                    k=k,
-                    distance_transform=d2s,
-                )[0]
-                cache["resnet"][f"{image_count}-{k}-{d2s}"] = cbir_resnet_result
-            image_count += 1
-            rs.append(
-                ensemble_search(
-                    cbir_sift_result,
-                    cbir_color_result,
-                    cbir_resnet_result,
-                    weights=weight,
-                    datalength=len(dataset),
-                    k = 1000
-                )
-            )
+        images = images.numpy()
+        rs.extend(cbir.retrieve(images, k=1000))
         ground_truth.extend(labels)
     avg_retrieval_time = round((time() - start) / len(dataset), 6)
 
@@ -178,7 +121,6 @@ for k, d2s, weight in grid(ks, d2ss, weights):
         for i in r:
             predicted.append(i.index)
         class_preds = np.take(dataset.targets, predicted, axis=0)
-        predicted = np.array(predicted).tolist()
         ap1.append(average_precision(class_preds.tolist(), [g.tolist()], 1))
         hit1.append(hit_rate(class_preds.tolist(), [g.tolist()], 1))
         recall1.append(recall(predicted, np.where(np.isin(np.array(dataset.targets), [g.tolist()]))[0], 1))
@@ -204,12 +146,10 @@ for k, d2s, weight in grid(ks, d2ss, weights):
     avg_recall100 = round(np.mean(recall100), 6)
     avg_recall1000 = round(np.mean(recall1000), 6)
 
-    # Store evaluation results
     new_row = pd.DataFrame(
         {
-            "k": [k],
-            "distance2score": [d2s],
-            "weight(sift vs color vs resnet)": [weight],
+            "model": [model],
+            "metric": [metric],
             "map@1": [map1],
             "map@5": [map5],
             "map@10": [map10],
@@ -241,5 +181,9 @@ for k, d2s, weight in grid(ks, d2ss, weights):
         "avg_indexing_time: ", avg_indexing_time,
         "avg_retrieval_time: ", avg_retrieval_time,
     )
-
-eval.to_csv("out/ensemble_sift_color_resnet_knn_eval.csv", index=False)
+    
+    # Cleanup
+    del cbir
+    del array_store
+    gc.collect()
+eval.to_csv("out/resnet_knn_cpu_eval.csv", index=False)

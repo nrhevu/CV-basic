@@ -82,7 +82,7 @@ eval = pd.DataFrame(
 siftbow = SIFTBOWExtractor(mode="tfidf")
 sift_array_store = NPArrayStore(retrieve=KNNRetrieval(metric="manhattan"))
 
-rgb_histogram = RGBHistogram(n_bin=4, h_type="region")
+rgb_histogram = RGBHistogram(n_bin=4, h_type="region", n_slice=5)
 color_array_store = NPArrayStore(retrieve=KNNRetrieval(metric="cosine"))
     
 # Fitting siftbow with train data
