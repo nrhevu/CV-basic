@@ -21,7 +21,7 @@ class FourierDescriptor(SingleFeatureExtractor):
         normalize=True,
         **kwargs,
     ) -> None:
-        self.n_sclice = n_slice
+        self.n_slice = n_slice
         self.num_coeffs = num_coeffs
         self.h_type = h_type
         self.normalize = normalize
@@ -35,7 +35,7 @@ class FourierDescriptor(SingleFeatureExtractor):
             hist = self.__fourier_descriptor(img)
 
         elif self.h_type == "region":
-            hist = np.zeros((self.n_slice, self.n_slice, self.bin))
+            hist = np.zeros((self.n_slice, self.n_slice, self.num_coeffs))
             h_silce = np.around(
                 np.linspace(0, height, self.n_slice + 1, endpoint=True)
             ).astype(int)
@@ -59,27 +59,37 @@ class FourierDescriptor(SingleFeatureExtractor):
         # Convert to grayscale
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY) 
 
-        # Apply Canny edge detection
-        edges = cv2.Canny(gray, 100, 200) 
+        # Apply Canny
+        edges = cv2.Canny(gray, 100, 200)
 
         # Find contours
         contours, _ = cv2.findContours(edges, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-
-        # Select a contour
-        cnt = contours[0]
-
-        # Resample the contour to a fixed number of points
-        epsilon = 0.01 * cv2.arcLength(cnt, True)
-        approx = cv2.approxPolyDP(cnt, epsilon, True)
-
-        # Compute Fourier descriptors
-        fd = cv2.dft(approx.astype(np.float32))
-
-        # Extract magnitude and phase
-        magnitude = cv2.magnitude(fd[:, 0], fd[:, 1])
-        phase = cv2.phase(fd[:, 0], fd[:, 1])
-
-        # Select a subset of Fourier coefficients
-        fd_selected = magnitude[:self.num_coeffs]
         
-        return fd_selected
+        # Get the largest contour (assuming it is the main shape)
+        try:
+            contour = max(contours, key=cv2.contourArea)
+        except:
+            return np.zeros(self.num_coeffs)
+
+        # Convert contour to complex numbers
+        contour_complex = np.empty(contour.shape[0], dtype=complex)
+        contour_complex.real = contour[:, 0, 0]  # x coordinates
+        contour_complex.imag = contour[:, 0, 1]  # y coordinates
+        
+        # Perform Discrete Fourier Transform (DFT)
+        fourier_result = np.fft.fft(contour_complex)
+        
+        # # Normalize the Fourier descriptors to achieve scale invariance
+        # fourier_result /= np.abs(fourier_result[1])
+        
+        # Retain only the first `self.num_coeffs` descriptors for comparison
+        if self.num_coeffs is not None:
+            descriptors = fourier_result[:self.num_coeffs]
+        else:
+            descriptors = fourier_result
+
+        if len(descriptors) < self.num_coeffs:
+            descriptors = np.pad(np.abs(descriptors), (0, self.num_coeffs - len(descriptors)))
+            return descriptors
+            
+        return np.abs(descriptors)
