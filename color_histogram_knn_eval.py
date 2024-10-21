@@ -59,7 +59,9 @@ testloader = torch.utils.data.DataLoader(
 # BEGIN EVALUATION
 eval = pd.DataFrame(
     columns=[
-        "model",
+        "bins",
+        "htype",
+        "slice",
         "metric",
         "map@1",
         "map@5",
@@ -77,20 +79,22 @@ eval = pd.DataFrame(
     ]
 )
 
-models = ["resnet18", "resnet34", "resnet50", "resnet101", "resnet152"]
+n_bins = [2, 4, 8, 12]
+h_types = ["region", "global"]
+n_slices = [2, 3, 4, 5]
 knn_metrics = ["euclidean", "cosine"]
-for model, metric in grid(models, knn_metrics):
-    print("Evaluate for model: ", model, " with knn metric: ", metric)
+for bins, h_type, n_slice, metric in grid(n_bins, h_types, n_slices, knn_metrics):
+    print("Evaluate for bins: ", bins, " h_type: ", h_type, " n_slice: ", n_slice, " with knn metric: ", metric)
 
     # Initialization
-    resnet = ResNetExtractor(model=model, device="cuda")
+    rgb_histogram = RGBHistogram(n_bin=bins, n_slice=n_slice, h_type=h_type)
     array_store = NPArrayStore(retrieve=KNNRetrieval(metric=metric))
-    cbir = CBIR(resnet, array_store)
+    cbir = CBIR(rgb_histogram, array_store)
 
     # Indexing
     start = time()
     for images, labels in tqdm(dataloader, desc="Indexing"):
-        images = images.numpy()
+        images = (images.numpy().transpose(0,2,3,1) * 255).astype(np.uint8)
         cbir.indexing(images)
     avg_indexing_time = round((time() - start) / len(dataset), 6)
 
@@ -99,8 +103,9 @@ for model, metric in grid(models, knn_metrics):
     rs = []
     ground_truth = []
     for images, labels in tqdm(testloader, desc="Retrieval"):
-        images = images.numpy()
-        rs.extend(cbir.retrieve(images, k=1000))
+        images = (images.numpy().transpose(0,2,3,1) * 255).astype(np.uint8)
+        for image in images:
+            rs.append(cbir.retrieve(image, k=1000))
         ground_truth.extend(labels)
     avg_retrieval_time = round((time() - start) / len(dataset), 6)
 
@@ -133,7 +138,6 @@ for model, metric in grid(models, knn_metrics):
         recall100.append(recall(predicted, np.where(np.isin(np.array(dataset.targets), [g.tolist()]))[0], 100))
         recall1000.append(recall(predicted, np.where(np.isin(np.array(dataset.targets), [g.tolist()]))[0], 1000))
 
-
     map1 = round(np.mean(ap1), 6)
     avg_hit1 = round(np.mean(hit1), 6)
     avg_recall1 = round(np.mean(recall1), 6)
@@ -148,7 +152,9 @@ for model, metric in grid(models, knn_metrics):
 
     new_row = pd.DataFrame(
         {
-            "model": [model],
+            "bins": [bins],
+            "htype": [h_type],
+            "slice": [n_slice],
             "metric": [metric],
             "map@1": [map1],
             "map@5": [map5],
@@ -186,4 +192,4 @@ for model, metric in grid(models, knn_metrics):
     del cbir
     del array_store
     gc.collect()
-eval.to_csv("out/resnet_knn_gpu_eval.csv", index=False)
+eval.to_csv("out/histogram_knn_eval.csv", index=False)

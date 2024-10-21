@@ -83,7 +83,7 @@ for model, metric in grid(models, knn_metrics):
     print("Evaluate for model: ", model, " with knn metric: ", metric)
 
     # Initialization
-    resnet = ResNetExtractor(model=model, device="cuda")
+    resnet = ResNetExtractor(model=model, device="cpu")
     array_store = NPArrayStore(retrieve=KNNRetrieval(metric=metric))
     cbir = CBIR(resnet, array_store)
 
@@ -186,4 +186,4 @@ for model, metric in grid(models, knn_metrics):
     del cbir
     del array_store
     gc.collect()
-eval.to_csv("out/resnet_knn_gpu_eval.csv", index=False)
+eval.to_csv("out/resnet_knn_cpu_eval.csv", index=False)

@@ -57,40 +57,27 @@ testloader = torch.utils.data.DataLoader(
 )
 
 # BEGIN EVALUATION
-eval = pd.DataFrame(
-    columns=[
-        "model",
-        "metric",
-        "map@1",
-        "map@5",
-        "map@10",
-        "hit_rate@1",
-        "hit_rate@5",
-        "hit_rate@10",
-        "recall@1",
-        "recall@5",
-        "recall@10",
-        "recall@100",
-        "recall@1000",
-        "avg_indexing_time",
-        "avg_retrieval_time",
-    ]
-)
+eval = pd.DataFrame()
 
-models = ["resnet18", "resnet34", "resnet50", "resnet101", "resnet152"]
+num_coeffs = [10, 20, 30]
+n_slices = [1, 10, 15]
 knn_metrics = ["euclidean", "cosine"]
-for model, metric in grid(models, knn_metrics):
-    print("Evaluate for model: ", model, " with knn metric: ", metric)
+for num_coeff, n_slice, metric in grid(num_coeffs, n_slices, knn_metrics):
+    if n_slice == 1:
+        h_type = "global"
+    else: 
+        h_type = "region"
+    print("Evaluate for num_coeffs: ", num_coeff, " h_type: ", h_type, " n_slice: ", n_slice, " with knn metric: ", metric)
 
     # Initialization
-    resnet = ResNetExtractor(model=model, device="cuda")
+    fourier_descriptor = FourierDescriptor(n_slice=n_slice, h_type=h_type, num_coeffs=num_coeff)
     array_store = NPArrayStore(retrieve=KNNRetrieval(metric=metric))
-    cbir = CBIR(resnet, array_store)
+    cbir = CBIR(fourier_descriptor, array_store)
 
     # Indexing
     start = time()
     for images, labels in tqdm(dataloader, desc="Indexing"):
-        images = images.numpy()
+        images = (images.numpy().transpose(0,2,3,1) * 255).astype(np.uint8)
         cbir.indexing(images)
     avg_indexing_time = round((time() - start) / len(dataset), 6)
 
@@ -99,8 +86,9 @@ for model, metric in grid(models, knn_metrics):
     rs = []
     ground_truth = []
     for images, labels in tqdm(testloader, desc="Retrieval"):
-        images = images.numpy()
-        rs.extend(cbir.retrieve(images, k=1000))
+        images = (images.numpy().transpose(0,2,3,1) * 255).astype(np.uint8)
+        for image in images:
+            rs.append(cbir.retrieve(image, k=1000))
         ground_truth.extend(labels)
     avg_retrieval_time = round((time() - start) / len(dataset), 6)
 
@@ -133,7 +121,6 @@ for model, metric in grid(models, knn_metrics):
         recall100.append(recall(predicted, np.where(np.isin(np.array(dataset.targets), [g.tolist()]))[0], 100))
         recall1000.append(recall(predicted, np.where(np.isin(np.array(dataset.targets), [g.tolist()]))[0], 1000))
 
-
     map1 = round(np.mean(ap1), 6)
     avg_hit1 = round(np.mean(hit1), 6)
     avg_recall1 = round(np.mean(recall1), 6)
@@ -148,7 +135,9 @@ for model, metric in grid(models, knn_metrics):
 
     new_row = pd.DataFrame(
         {
-            "model": [model],
+            "num_coeffs": [num_coeff],
+            "htype": [h_type],
+            "slice": [n_slice],
             "metric": [metric],
             "map@1": [map1],
             "map@5": [map5],
@@ -186,4 +175,4 @@ for model, metric in grid(models, knn_metrics):
     del cbir
     del array_store
     gc.collect()
-eval.to_csv("out/resnet_knn_gpu_eval.csv", index=False)
+eval.to_csv("out/fourier_descriptor_knn_eval.csv", index=False)

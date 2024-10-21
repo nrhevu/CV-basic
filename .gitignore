@@ -167,3 +167,5 @@ content-based-*.ipynb
 cbir_dev.ipynb
 *.ipynb
 *.png
+*.out
+test.py

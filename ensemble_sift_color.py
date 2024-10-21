@@ -68,6 +68,11 @@ eval = pd.DataFrame(
         "hit_rate@1",
         "hit_rate@5",
         "hit_rate@10",
+        "recall@1",
+        "recall@5",
+        "recall@10",
+        "recall@100",
+        "recall@1000",
         "avg_indexing_time",
         "avg_retrieval_time",
     ]
@@ -77,7 +82,7 @@ eval = pd.DataFrame(
 siftbow = SIFTBOWExtractor(mode="tfidf")
 sift_array_store = NPArrayStore(retrieve=KNNRetrieval(metric="manhattan"))
 
-rgb_histogram = RGBHistogram(n_bin=4, h_type="region")
+rgb_histogram = RGBHistogram(n_bin=4, h_type="region", n_slice=5)
 color_array_store = NPArrayStore(retrieve=KNNRetrieval(metric="cosine"))
     
 # Fitting siftbow with train data
@@ -131,7 +136,7 @@ for k, d2s, weight in grid(ks, d2ss, weights):
                     cbir_color_result,
                     weights=weight,
                     datalength=len(dataset),
-                    k = 10
+                    k = 1000
                 )
             )
         ground_truth.extend(labels)
@@ -140,28 +145,45 @@ for k, d2s, weight in grid(ks, d2ss, weights):
     # Evaluation
     ap1 = []
     hit1 = []
+    recall1 = []
     ap5 = []
     hit5 = []
+    recall5 = []
     ap10 = []
     hit10 = []
+    recall10 = []
+    recall100 = []
+    recall1000 = [] 
     for r, g in zip(rs, ground_truth):
         predicted = []
         for i in r:
             predicted.append(i.index)
         class_preds = np.take(dataset.targets, predicted, axis=0)
+        predicted = np.array(predicted).tolist()
         ap1.append(average_precision(class_preds.tolist(), [g.tolist()], 1))
         hit1.append(hit_rate(class_preds.tolist(), [g.tolist()], 1))
+        recall1.append(recall(predicted, np.where(np.isin(np.array(dataset.targets), [g.tolist()]))[0], 1))
         ap5.append(average_precision(class_preds.tolist(), [g.tolist()], 5))
         hit5.append(hit_rate(class_preds.tolist(), [g.tolist()], 5))
+        recall5.append(recall(predicted, np.where(np.isin(np.array(dataset.targets), [g.tolist()]))[0], 5))
         ap10.append(average_precision(class_preds.tolist(), [g.tolist()], 10))
         hit10.append(hit_rate(class_preds.tolist(), [g.tolist()], 10))
+        recall10.append(recall(predicted, np.where(np.isin(np.array(dataset.targets), [g.tolist()]))[0], 10))
+        recall100.append(recall(predicted, np.where(np.isin(np.array(dataset.targets), [g.tolist()]))[0], 100))
+        recall1000.append(recall(predicted, np.where(np.isin(np.array(dataset.targets), [g.tolist()]))[0], 1000))
+
 
     map1 = round(np.mean(ap1), 6)
     avg_hit1 = round(np.mean(hit1), 6)
+    avg_recall1 = round(np.mean(recall1), 6)
     map5 = round(np.mean(ap5), 6)
     avg_hit5 = round(np.mean(hit5), 6)
+    avg_recall5 = round(np.mean(recall5), 6)
     map10 = round(np.mean(ap10), 6)
     avg_hit10 = round(np.mean(hit10), 6)
+    avg_recall10 = round(np.mean(recall10), 6)
+    avg_recall100 = round(np.mean(recall100), 6)
+    avg_recall1000 = round(np.mean(recall1000), 6)
     
     # Store evaluation results
     new_row = pd.DataFrame(
@@ -175,6 +197,11 @@ for k, d2s, weight in grid(ks, d2ss, weights):
             "hit_rate@1": [avg_hit1],
             "hit_rate@5": [avg_hit5],
             "hit_rate@10": [avg_hit10],
+            "recall@1": [avg_recall1],
+            "recall@5": [avg_recall5],
+            "recall@10": [avg_recall10],
+            "recall@100": [avg_recall100],
+            "recall@1000": [avg_recall1000],
             "avg_indexing_time": [avg_indexing_time],
             "avg_retrieval_time": [avg_retrieval_time],
         }
@@ -187,6 +214,11 @@ for k, d2s, weight in grid(ks, d2ss, weights):
         "hit_rate@1: ", avg_hit1,
         "hit_rate@5: ", avg_hit5,
         "hit_rate@10: ", avg_hit10,
+        "recall@1: ", avg_recall1,
+        "recall@5: ", avg_recall5,
+        "recall@10: ", avg_recall10,
+        "recall@100: ", avg_recall100,
+        "recall@1000: ", avg_recall1000,
         "avg_indexing_time: ", avg_indexing_time,
         "avg_retrieval_time: ", avg_retrieval_time,
     )
